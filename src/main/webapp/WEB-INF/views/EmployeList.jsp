@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employe List</title>
@@ -12,17 +13,23 @@
 <body>
     <header>
         <h1>Employe List</h1>
+        <br>
     </header>
     <main>
-        <table>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
             <tr>
-                <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+                <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+
             </tr>
+            </thead>
+            <tbody>
             <c:forEach items="${empJsp}" var="employe">
                 <tr>
                     <td>${employe.id}</td>
                     <td>${employe.nom}</td>
                     <td>${employe.prenom}</td>
+                    <td>${employe.email}</td>
                     <td>${employe.role}</td>
                     <td>${employe.service}</td>
                     <td>${employe.soldeConges}</td>
@@ -30,10 +37,14 @@
                     <td><a href="showEmploye?id=${employe.id}">modifier</a></td>
                 </tr>
             </c:forEach>
+
+            </tbody>
         </table>
+
     </main>
+    <br>
     <footer>
-        <a href="CreateEmploye">Employe Creation</a>
+        <a href="createEmploye">ajouter employe</a>
     </footer>
 </body>
 </html>

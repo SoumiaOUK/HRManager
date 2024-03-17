@@ -19,7 +19,7 @@ public class EmployeController {
     EmployeService empService;
 
     @RequestMapping("/createEmploye")
-    public String createEmloye(){
+    public String createEmploye(){
         return "CreateEmploye";
     }
 
@@ -33,7 +33,7 @@ public class EmployeController {
         String messageFromController = "L'employe  : "+memo.getNom() +"a été ajouter avec succes son id est "+memo.getId();
         //envoyer message vers jsp
         modelMap.addAttribute("messageJsp",messageFromController);
-        return "UserCreated";
+        return "CreateEmploye";
     }
 
     @RequestMapping("/employeList")

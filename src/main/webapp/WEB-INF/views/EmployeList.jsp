@@ -27,6 +27,7 @@
                     <td>${employe.service}</td>
                     <td>${employe.soldeConges}</td>
                     <td><a href="deleteEmploye?id=${employe.id}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
+                    <td><a href="showEmploye?id=${employe.id}">modifier</a></td>
                 </tr>
             </c:forEach>
         </table>

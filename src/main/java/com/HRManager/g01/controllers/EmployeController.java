@@ -18,17 +18,15 @@ public class EmployeController {
     @Autowired
     EmployeService empService;
 
-    @RequestMapping("/CreateEmploye")
+    @RequestMapping("/createEmploye")
     public String createEmloye(){
         return "CreateEmploye";
     }
 
     //comment le controller communique avec les vues
-    @RequestMapping("saveEmploye")
-    public String saveEmploye(
-            //faire passer le produit du jsp au controller
-            @ModelAttribute("employe") Employe employe,
-            ModelMap modelMap
+    @RequestMapping("/saveEmploye")
+    public String saveEmploye(@ModelAttribute("employe") Employe employe//faire passer le produit du jsp au controller
+            ,ModelMap modelMap //faire passer message du controller vers jsp
     ){
         //faire passer info from DB to jsp
         Employe memo = empService.saveEmploye(employe);
@@ -38,7 +36,7 @@ public class EmployeController {
         return "UserCreated";
     }
 
-    @RequestMapping("/EmployeList")
+    @RequestMapping("/employeList")
     public String employeList(ModelMap modelMap){
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
@@ -48,13 +46,30 @@ public class EmployeController {
     }
 
     @RequestMapping("/deleteEmploye")
-    public String employedelete(@RequestParam("id") Long id,ModelMap modelMap){
+    public String deleteEmploye(@RequestParam("id") Long id,ModelMap modelMap){
         empService.deleteEmployeById(id);
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("empJsp",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
+    }
+
+    @RequestMapping("/showEmploye")
+    public String showEmploye(@RequestParam("id") Long id ,ModelMap modelMap){
+        Employe emp = empService.getEmploye(id);
+        modelMap.addAttribute("empJsp",emp);
+        return "EditEmploye";
+    }
+
+
+    @RequestMapping("/updateEmploye")
+    public String updateEmploye( @ModelAttribute("employe") Employe employe//faire passer le produit du jsp au controller
+                                ,ModelMap modelMap //faire passer message du controller vers jsp
+    ){
+        //faire passer info from DB to jsp
+        empService.updateEmploye(employe);
+        return "EditEmploye";
     }
 
 

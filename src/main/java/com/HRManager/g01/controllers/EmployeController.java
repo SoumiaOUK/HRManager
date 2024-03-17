@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -39,6 +40,16 @@ public class EmployeController {
 
     @RequestMapping("/EmployeList")
     public String employeList(ModelMap modelMap){
+        List<Employe> listEmp = empService.getAllEmployees();
+        //on envoie la list du controlleur vers jsp using model map
+        modelMap.addAttribute("empJsp",listEmp);
+        //retourn nom d'une view qu'on va chercher dans Views
+        return "EmployeList";
+    }
+
+    @RequestMapping("/deleteEmploye")
+    public String employedelete(@RequestParam("id") Long id,ModelMap modelMap){
+        empService.deleteEmployeById(id);
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("empJsp",listEmp);

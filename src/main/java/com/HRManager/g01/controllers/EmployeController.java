@@ -25,15 +25,10 @@ public class EmployeController {
 
     //comment le controller communique avec les vues
     @RequestMapping("/saveEmploye")
-    public String saveEmploye(@ModelAttribute("employe") Employe employe//faire passer le produit du jsp au controller
-            ,ModelMap modelMap //faire passer message du controller vers jsp
-    ){
-        //faire passer info from DB to jsp
+    public String saveEmploye(@ModelAttribute("employe") Employe employe){
+        //faire passer info from DB to th
         Employe memo = empService.saveEmploye(employe);
-        String messageFromController = "L'employe  : "+memo.getNom() +"a été ajouter avec succes son id est "+memo.getId();
-        //envoyer message vers jsp
-        modelMap.addAttribute("messageJsp",messageFromController);
-        return "CreateEmploye";
+         return "CreateEmploye";
     }
 
     @RequestMapping("/employeList")

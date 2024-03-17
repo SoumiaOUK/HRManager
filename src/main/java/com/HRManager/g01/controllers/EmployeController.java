@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 //intermediare avec service
 public class EmployeController {
@@ -33,6 +35,15 @@ public class EmployeController {
         //envoyer message vers jsp
         modelMap.addAttribute("messageJsp",messageFromController);
         return "UserCreated";
+    }
+
+    @RequestMapping("/EmployeList")
+    public String employeList(ModelMap modelMap){
+        List<Employe> listEmp = empService.getAllEmployees();
+        //on envoie la list du controlleur vers jsp using model map
+        modelMap.addAttribute("empJsp",listEmp);
+        //retourn nom d'une view qu'on va chercher dans Views
+        return "EmployeList";
     }
 
 

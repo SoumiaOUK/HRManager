@@ -35,7 +35,7 @@ public class EmployeController {
     public String employeList(ModelMap modelMap){
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
-        modelMap.addAttribute("empJsp",listEmp);
+        modelMap.addAttribute("empTh",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
     }
@@ -45,7 +45,7 @@ public class EmployeController {
         empService.deleteEmployeById(id);
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
-        modelMap.addAttribute("empJsp",listEmp);
+        modelMap.addAttribute("empTh",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
     }
@@ -53,17 +53,15 @@ public class EmployeController {
     @RequestMapping("/showEmploye")
     public String showEmploye(@RequestParam("id") Long id ,ModelMap modelMap){
         Employe emp = empService.getEmploye(id);
-        modelMap.addAttribute("empJsp",emp);
+        modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
     }
 
 
     @RequestMapping("/updateEmploye")
-    public String updateEmploye( @ModelAttribute("employe") Employe employe//faire passer le produit du jsp au controller
-                                ,ModelMap modelMap //faire passer message du controller vers jsp
-    ){
-        //faire passer info from DB to jsp
-        empService.updateEmploye(employe);
+    public String updateEmploye( @ModelAttribute("employe") Employe employe){
+        System.out.println("**************"+employe);
+        empService.saveEmploye(employe);
         return "EditEmploye";
     }
 

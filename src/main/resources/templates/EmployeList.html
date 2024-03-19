@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Th - Employe List</title>
+</head>
+<body>
+    <header>
+        <h1>Employe List</h1>
+        <br>
+    </header>
+    <main>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employe:${empTh}">
+                    <td th:text="${employe.id}"></td>
+                    <td th:text="${employe.nom}"></td>
+                    <td th:text="${employe.prenom}"></td>
+                    <td th:text="${employe.email}"></td>
+                    <td th:text="${employe.role}"></td>
+                    <td th:text="${employe.service}"></td>
+                    <td th:text="${employe.soldeConges}"></td>
+                    <td><a th:href="@{deleteEmploye(id=${employe.id})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
+                    <td><a th:href="@{showEmploye(id=${employe.id})}">modifier</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+    <br>
+    <footer>
+        <a href="createEmploye">ajouter employe</a>
+    </footer>
+</body>
+</html>

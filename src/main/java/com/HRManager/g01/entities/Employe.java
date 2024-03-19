@@ -4,9 +4,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Employe {
+
+
+    /*
+    @NotNull //elle doit etre rempli
+    @Size(min=3, max= 20) // nombre de carachtere
+    @Min(10) // nombre min est 10
+    @Max(200) // nombre max est 20
+    @PastOrPresent // valeur date de passé ou présent
+
+    attention si ces restriction ne sont pas appliqué on nous affiche une erreur sauf si on a ajouter du code dans controller
+
+
+
+     */
     @Id
     //SGBD  = Identity
     //par implementation = AUTO
@@ -16,11 +33,13 @@ public class Employe {
     private String nom;
 
     private String prenom;
+@NotNull
 
     private String email;
 
     private String service;
-
+@Min(20)
+@Max(32)
     private int soldeConges;
 
     private String role;

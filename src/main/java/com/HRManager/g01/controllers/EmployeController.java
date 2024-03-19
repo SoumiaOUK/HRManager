@@ -2,9 +2,11 @@ package com.HRManager.g01.controllers;
 
 import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.services.EmployeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,12 @@ public class EmployeController {
 
     //comment le controller communique avec les vues
     @RequestMapping("/saveEmploye")
-    public String saveEmploye(@ModelAttribute("employe") Employe employe){
+    public String saveEmploye(@Valid Employe employe, BindingResult bR,ModelMap modelMap){
+        if (bR.hasErrors()) {
+            // If there are validation errors, add an error message to the model
+            modelMap.addAttribute("errorMessage", "Please fix the validation errors and submit again.");
+            return "CreateEmploye"; // Return to the form with the error message
+        }
         //faire passer info from DB to th
         Employe memo = empService.saveEmploye(employe);
          return "CreateEmploye";

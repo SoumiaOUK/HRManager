@@ -8,6 +8,11 @@
 <br>
 <form th:action="@{saveEmploye}" method="post">
     <div>
+        <!-- Add this block to display the error message -->
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
         <div class="row g-5">
             <div class="col">
                 <div data-mdb-input-init class="form-outline">

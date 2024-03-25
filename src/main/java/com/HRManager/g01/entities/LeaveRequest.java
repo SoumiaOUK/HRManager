@@ -7,7 +7,7 @@ import java.util.Date;
 import jakarta.persistence.Entity;
 
 @Entity
-public class DemandeConge {
+public class LeaveRequest {
     @Id
     @GeneratedValue
     private Long id;

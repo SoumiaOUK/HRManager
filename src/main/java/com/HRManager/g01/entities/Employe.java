@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Employe {
+public class Employe extends Person {
 
 
     /*
@@ -30,80 +30,46 @@ public class Employe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nom;
 
-    private String prenom;
-@NotNull
-
-    private String email;
-
-    private String service;
 @Min(20)
 @Max(32)
     private int soldeConges;
 
     private String role;
 
-    @Override
-    public String toString() {
-        return "Employe{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", email='" + email + '\'' +
-                ", service='" + service + '\'' +
-                ", soldeConges=" + soldeConges +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
     public Employe(){
         super();
     }
 
     public Employe(String nom, String prenom, String email, String service, int soldeConges, String role) {
-        this.nom = nom;
-        this.prenom = prenom;
+        this.firstName = nom;
+        this.lastName = prenom;
         this.email = email;
-        this.service = service;
+        this.departement = service;
         this.soldeConges = soldeConges;
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Employe{" +
+                "id=" + id +
+                ", soldeConges=" + soldeConges +
+                ", role='" + role + '\'' +
+                ", id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", departement='" + departement + '\'' +
+                '}';
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getService() {
-        return service;
-    }
-
-    public void setService(String service) {
-        this.service = service;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getSoldeConges() {

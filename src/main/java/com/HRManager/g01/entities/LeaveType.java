@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 
 @Entity
-public class TypeConge {
+public class LeaveType {
     @Id
     @GeneratedValue
     private Long id;

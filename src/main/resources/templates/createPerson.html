@@ -6,7 +6,7 @@
 <body>
 <h1>Ajouter un employe</h1>
 <br>
-<form th:action="@{saveEmploye}" method="post">
+<form th:action="@{savePerson}" method="post">
   <div>
     <!-- Add this block to display the error message -->
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">

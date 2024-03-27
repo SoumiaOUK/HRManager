@@ -15,7 +15,7 @@ class G01ApplicationTests {
 	EmployeRepository empRepo;
 	@Test
 	public void TestCreateEmploye(){
-		Employe emp = new Employe("Said","Regragi","saidSaido@gmail.com","IT",30,"employe");
+		Employe emp = new Employe();
 		empRepo.save(emp);
 	}
 	/*

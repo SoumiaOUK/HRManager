@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+  <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Th - Person List</title>
+</head>
+<body>
+<header>
+  <h1>Person List</h1>
+  <br>
+</header>
+<main>
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+    <tr>
+      <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="Person:${empTh}">
+      <td th:text="${Person.id}"></td>
+      <td th:text="${Person.firstName}"></td>
+      <td th:text="${Person.lastName}"></td>
+      <td th:text="${Person.email}"></td>
+      <td th:text="${Person.role}"></td>
+      <td th:text="${Person.departement}"></td>
+      <td th:text="${Person.soldeConges}"></td>
+      <td><a th:href="@{deletePerson(id=${Person.id})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet Person')">Delete</a></td>
+      <td><a th:href="@{showPerson(id=${Person.id})}">modifier</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</main>
+<br>
+<footer>
+  <a href="createPerson">ajouter Person</a>
+</footer>
+</body>
+</html>

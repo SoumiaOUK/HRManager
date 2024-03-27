@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
 <head>
@@ -8,37 +7,35 @@
     <title>Th - Employe List</title>
 </head>
 <body>
-    <header>
-        <h1>Employe List</h1>
-        <br>
-    </header>
-    <main>
-        <table class="table align-middle mb-0 bg-white">
-            <thead class="bg-light">
-            <tr>
-                <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
-
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="employe:${empTh}">
-                    <td th:text="${employe.id}"></td>
-                    <td th:text="${employe.nom}"></td>
-                    <td th:text="${employe.prenom}"></td>
-                    <td th:text="${employe.email}"></td>
-                    <td th:text="${employe.role}"></td>
-                    <td th:text="${employe.service}"></td>
-                    <td th:text="${employe.soldeConges}"></td>
-                    <td><a th:href="@{deleteEmploye(id=${employe.id})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
-                    <td><a th:href="@{showEmploye(id=${employe.id})}">modifier</a></td>
-                </tr>
-            </tbody>
-        </table>
-
-    </main>
+<header>
+    <h1>Employe List</h1>
     <br>
-    <footer>
-        <a href="createEmploye">ajouter employe</a>
-    </footer>
+</header>
+<main>
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+        <tr>
+            <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employe:${empTh}">
+            <td th:text="${employe.idPerson}"></td>
+            <td th:text="${employe.firstName}"></td>
+            <td th:text="${employe.lastName}"></td>
+            <td th:text="${employe.email}"></td>
+            <td th:text="${employe.role}"></td>
+            <td th:text="${employe.departement}"></td>
+            <td th:text="${employe.soldeConges}"></td>
+            <td><a th:href="@{deleteEmploye(id=${employe.idPerson})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
+            <td><a th:href="@{showEmploye(id=${employe.idPerson})}">modifier</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<br>
+<footer>
+    <a href="createEmploye">ajouter employe</a>
+</footer>
 </body>
 </html>

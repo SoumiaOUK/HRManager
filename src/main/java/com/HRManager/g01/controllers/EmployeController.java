@@ -1,5 +1,4 @@
 package com.HRManager.g01.controllers;
-
 import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.services.EmployeService;
 import jakarta.validation.Valid;
@@ -10,21 +9,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 @Controller
 //intermediare avec service
 public class EmployeController {
     @Autowired
     EmployeService empService;
-
     @RequestMapping("/createEmploye")
     public String createEmploye(){
         return "CreateEmploye";
     }
-
     //comment le controller communique avec les vues
     @RequestMapping("/saveEmploye")
     public String saveEmploye(@Valid Employe employe, BindingResult bR,ModelMap modelMap){
@@ -37,7 +31,6 @@ public class EmployeController {
         Employe memo = empService.saveEmploye(employe);
          return "CreateEmploye";
     }
-
     @RequestMapping("/employeList")
     public String employeList(ModelMap modelMap){
         List<Employe> listEmp = empService.getAllEmployees();
@@ -46,7 +39,6 @@ public class EmployeController {
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
     }
-
     @RequestMapping("/deleteEmploye")
     public String deleteEmploye(@RequestParam("id") Long id,ModelMap modelMap){
         empService.deleteEmployeById(id);
@@ -56,21 +48,21 @@ public class EmployeController {
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
     }
-
     @RequestMapping("/showEmploye")
     public String showEmploye(@RequestParam("id") Long id ,ModelMap modelMap){
         Employe emp = empService.getEmploye(id);
         modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
     }
-
-
     @RequestMapping("/updateEmploye")
-    public String updateEmploye( @ModelAttribute("employe") Employe employe){
-        System.out.println("**************"+employe);
+    public String updateEmploye( @ModelAttribute("employe") Employe employe,@RequestParam("idPerson") Long idPerson,ModelMap modelMap){
+        System.out.println("\n id employe to update "+idPerson);
+        System.out.println("**************"+employe.getDepartement());
         empService.saveEmploye(employe);
+        Employe emp=empService.getEmploye(idPerson);
+        modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
+
+
     }
-
-
 }

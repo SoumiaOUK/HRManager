@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+  <h1>
+  List Leave's types
+</h1>
+    <select id="leaveType" name="leaveType">
+      <option value="leaveType">Sélectionnez un rôle</option>
+      <option th:each="type : ${leaveType}" th:value="${leaveType.libelle}" th:text="${leaveType.libelle}"></option>
+    </select>
+</p>
+
+</body>
+</html>

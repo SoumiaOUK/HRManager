@@ -22,7 +22,7 @@ public class EmployeServiceImp implements EmployeService{
     }
 
     @Override
-    public Employe getEmploye(Long id) {
+    public Employe getEmploye(long id) {
         return empRep.findById(id).get();
     }
 

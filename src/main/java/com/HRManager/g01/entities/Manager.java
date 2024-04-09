@@ -30,4 +30,16 @@ public class Manager extends Person{
     public void setLeaves(List<LeaveRequest> leaves) {
         this.leaves = leaves;
     }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "leaves=" + leaves +
+                ", idPerson=" + idPerson +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", departement='" + departement + '\'' +
+                '}';
+    }
 }

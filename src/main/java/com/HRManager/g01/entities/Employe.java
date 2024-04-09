@@ -20,18 +20,20 @@ public class Employe extends Person {
         this.soldeConges = soldeConges;
         this.role = role;
     }
+
     @Override
     public String toString() {
         return "Employe{" +
-                ", soldeConges=" + soldeConges +
+                "soldeConges=" + soldeConges +
                 ", role='" + role + '\'' +
-                ", id=" + idPerson +
+                ", idPerson=" + idPerson +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", departement='" + departement + '\'' +
                 '}';
     }
+
     public int getSoldeConges() {
         return soldeConges;
     }

@@ -11,5 +11,13 @@ import java.util.List;
 
 @Controller
 public class LeaveTypeController {
-
+@Autowired
+    LeaveTypeService leaveTypeService;
+@RequestMapping("/listLeaveTypes")
+    public String listLeaveTypes(ModelMap modelMap){
+    List<LeaveType> leaveTypes=  leaveTypeService.getLeaveTypes();
+    System.out.println("====="+leaveTypes.toString());
+    modelMap.addAttribute("types",leaveTypes);
+    return "LeaveTypes/ListLeaveTypes";
+}
 }

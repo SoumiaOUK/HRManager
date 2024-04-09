@@ -23,6 +23,8 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Absence> absences;
 
+
+
     public Person() {
     }
 

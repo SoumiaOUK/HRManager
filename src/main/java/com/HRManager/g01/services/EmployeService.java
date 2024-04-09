@@ -5,7 +5,7 @@ import java.util.List;
 public interface EmployeService {
     Employe saveEmploye(Employe emp);
     Employe updateEmploye(Employe emp);
-    Employe getEmploye(Long id);
+    Employe getEmploye(long id);
     List<Employe> getAllEmployees();
     void deleteEmployeById(Long Id);
     void deleteAllEmploye();

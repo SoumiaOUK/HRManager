@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List leave types</title>
+</head>
+<body>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>Labelle</th>
+    <th>Duration</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+      <tr th:each="type : ${types}">
+        <td th:text="${type.idType}"></td>
+        <td th:text="${type.libelle}"></td>
+        <td th:text="${type.duration}"></td>
+        <td th:text="${type.description}"></td>
+      </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

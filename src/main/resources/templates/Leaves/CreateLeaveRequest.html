@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+  <title>Create Leave Request</title>
+</head>
+<body>
+<form th:action="@{saveLeaveReq}" method="post">
+  <!-- Add this block to display the error message -->
+  <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+    <p th:text="${errorMessage}"></p>
+  </div>
+
+  <label hidden="hidden" for="idLeave">idLeave</label>
+  <input hidden="hidden" type="text" id="idLeave" name="idLeave" for="idLeave">
+
+  <label for="startDate">Start Date:</label>
+  <input type="date" id="startDate" name="startDate"/>
+
+  <label for="endDate">End Date:</label>
+  <input type="date" id="endDate" name="endDate"/>
+
+
+  <label for="reason">Reason</label>
+  <input type="text" id="reason" name="reason" for="reason">
+
+  <label for="commentaire">Commentaire</label>
+  <input type="text" id="commentaire" name="commentaire" for="commentaire">
+
+
+
+
+  <label for="leaveType">Leave Types:</label>
+  <select id="leaveType" name="leaveType">
+    <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType.idType}" th:text="${leaveType.libelle}"></option>
+  </select><br>
+ <button type="submit">Submit</button>
+</form>
+<!--
+
+==id_leave
+commentaire
+==end_date
+==reason
+==start_date
+====status
+==id_type
+id_manager
+id_person
+duration
+
+
+
+validationrh
+approuved_date
+signature
+status
+
+
+
+
+-->
+</body>
+</html>

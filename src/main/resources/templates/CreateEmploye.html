@@ -1,16 +1,25 @@
-<html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
   <title>Th-Add Employe</title>
+<head>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+
 </head>
 <body>
-<h1>Ajouter un employe</h1>
+<h1>Add Employe</h1>
 <br>
 <form th:action="@{saveEmploye}" method="post">
   <div>
     <!-- Add this block to display the error message -->
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
       <p th:text="${errorMessage}"></p>
+    </div>
+
+    <div th:if="${#fields.hasErrors('*')}">
+      <ul>
+        <li th:each="field : ${#fields.detailedErrors()}">
+          <span th:text="${field.objectName}"></span> - <span th:text="${field.field}"></span>: <span th:text="${field.message}"></span>
+        </li>
+      </ul>
     </div>
 
     <div class="row g-5">

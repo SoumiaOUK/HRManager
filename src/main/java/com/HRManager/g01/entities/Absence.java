@@ -1,13 +1,12 @@
 package com.HRManager.g01.entities;
 import java.util.Date;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Absence {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date startDate;
     private Date endDate;

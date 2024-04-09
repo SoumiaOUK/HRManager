@@ -1,7 +1,10 @@
 package com.HRManager.g01;
 
 import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.entities.LeaveRequest;
 import com.HRManager.g01.repositories.EmployeRepository;
+import com.HRManager.g01.repositories.LeaveRequestRepository;
+import com.HRManager.g01.services.LeaveReqService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,4 +53,23 @@ class G01ApplicationTests {
 		empRepo.deleteAll();
 	}
 
+	@Autowired
+	LeaveRequestRepository leaveRepo;
+	@Test
+	public void TestShowEmpLeaves(){
+		List<LeaveRequest> myLeaves= leaveRepo.listLeavesByEmp(3);
+		myLeaves.forEach(System.out::println);
+	}
+	@Test
+	public void TestShowLeavesByManager(){
+		List<LeaveRequest> managedLeaves=leaveRepo.listLeavesByMan(1);
+		managedLeaves.forEach(System.out::println);
+	}
+	@Autowired
+	LeaveReqService leaveReqService;
+	@Test
+	public void TestAcceptLeave(){
+		leaveReqService.acceptLeaveRequest(3);
+		System.out.println("done");
+	}
 }

@@ -110,6 +110,7 @@ public class AccountServiceImp implements AccountService {
         if(userRepository.findByUsername(username)!=null) throw new RuntimeException("Error : username already exists!");
 
         String password= generateRandomPassword();
+        System.out.println("ACCOUNTSERVICEIMP =   password \n "+password+"\n ");
 
         User user = User.builder()
                 .userId(UUID.randomUUID().toString())

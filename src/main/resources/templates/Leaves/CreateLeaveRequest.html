@@ -50,6 +50,13 @@
       </select>
       <div class="invalid-feedback">Please select a leave type.</div>
     </div>
+    <div class="mb-3">
+      <label for="manager" class="form-label">Manager</label>
+      <select id="manager" name="manager" class="form-select" required>
+        <option th:each="manager : ${managers}" th:value="${manager.idPerson}" th:text="${manager.firstName}"></option>
+      </select>
+      <div class="invalid-feedback">Please select a leave type.</div>
+    </div>
 
     <!-- Bouton Soumettre -->
     <button type="submit" class="btn btn-primary">Submit</button>

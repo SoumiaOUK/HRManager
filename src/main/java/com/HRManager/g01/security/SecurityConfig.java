@@ -36,7 +36,7 @@ public class SecurityConfig{
                 .authorizeHttpRequests(
                         authCustomizer -> authCustomizer
                                 .requestMatchers("listLeaves").hasRole("MANAGER")
-                                .requestMatchers("/createEmploye","createLeaveReq").hasRole("EMPLOYE")
+                                .requestMatchers("/createEmploye").hasRole("EMPLOYE")
                                 .anyRequest().permitAll()
                 )
                 .exceptionHandling(e ->e.accessDeniedPage("/accessDenied"))

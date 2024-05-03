@@ -1,6 +1,7 @@
 package com.HRManager.g01.controllers;
 import com.HRManager.g01.entities.LeaveRequest;
 import com.HRManager.g01.entities.LeaveType;
+import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.enums.LeaveRequestStatus;
 import com.HRManager.g01.services.*;
 import jakarta.validation.Valid;
@@ -26,9 +27,11 @@ public class LeaveRequestController {
     @RequestMapping("/createLeaveReq")
     public String createLeaveReq(Model model) {
         List<LeaveType> leaveTypes = leaveTypeService.getLeaveTypes();
+        List<Manager> managers = managerService.getAllManagers();
         System.out.println("***                                                      Comment view LeaveRequestController  =             *************"+leaveTypes.toString());
         //model.addAttribute("leaveRequest", new LeaveRequest());
         model.addAttribute("leaveTypes", leaveTypes);
+        model.addAttribute("managers",managers);
         return "Leaves/CreateLeaveRequest";
     }
     @RequestMapping("/saveLeaveReq")
@@ -39,8 +42,8 @@ public class LeaveRequestController {
             return "Leaves/CreateLeaveRequest.html";
         }
         //manager , employe , status
-        leaveRequest.setManager(managerService.getManagerById(1));
-        leaveRequest.setPerson(empService.getEmploye(2));
+        //leaveRequest.setManager(managerService.getManagerById(1));
+        //leaveRequest.setPerson(empService.getEmploye(2));
         leaveRequest.setStatus(LeaveRequestStatus.PENDING);
         //save
         LeaveRequest memo = leaveReqService.saveLeave(leaveRequest);

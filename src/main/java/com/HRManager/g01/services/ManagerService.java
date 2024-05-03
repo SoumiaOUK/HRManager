@@ -7,4 +7,5 @@ import java.util.List;
 @Service
 public interface ManagerService {
     public Manager getManagerById(long id);
+    public List<Manager> getAllManagers();
 }

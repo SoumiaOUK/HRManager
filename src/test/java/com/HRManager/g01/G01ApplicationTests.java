@@ -5,10 +5,11 @@ import com.HRManager.g01.entities.LeaveRequest;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.repositories.EmployeRepository;
 import com.HRManager.g01.repositories.LeaveRequestRepository;
-import com.HRManager.g01.security.services.AccountService;
-import com.HRManager.g01.security.services.AccountServiceImp;
-import com.HRManager.g01.security.services.EmailServiceImp;
+import com.HRManager.g01.security.entities.Role;
+import com.HRManager.g01.security.repositories.RoleRepository;
+import com.HRManager.g01.security.services.*;
 import com.HRManager.g01.services.LeaveReqService;
+import com.HRManager.g01.services.ManagerServiceImp;
 import com.HRManager.g01.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,13 @@ class G01ApplicationTests {
 	EmployeRepository empRepo;
 	@Autowired
 	PersonService personeServiceImp;
+	/*
 	@Test
 	public void TestCreatePerson(){
 		personeServiceImp.savePerson(new Person("Souumia","ok","soumiaoukhira66@gmail.com","IT","MANAGER"));
 	}
+
+	 */
 	/*
 	//pourquoi cette méthode m'ajoute une nouvelle ligne dans DB
 	@Test
@@ -93,10 +97,13 @@ class G01ApplicationTests {
 		System.out.println(securityService.generateRandomPassword());;
 	}
 
+	/*
 	@Test
 	public void TestCreateUser(){
 		securityService.createUser("souuumia","ouuukhira","soumiaoukhira66@gmail.com");
 	}
+
+	 */
 	@Autowired
 	EmailServiceImp emailSender;
 
@@ -106,5 +113,42 @@ class G01ApplicationTests {
 
 		emailSender.sendEmail("soumiaoukhira66@gmail.com","hello","hey everyone");
 
+	}
+	//retourner listes des roles
+	@Autowired
+	RoleServiceImp roleServiceImp;
+	@Test
+	public void TestListRoles(){
+		System.out.println(roleServiceImp.getRoles());
+
+	}
+	//get all managers
+	@Autowired
+	ManagerServiceImp manager;
+	@Test
+	public void TestListManagers(){
+		System.out.println(manager.getAllManagers());
+	}
+	//ad role to user
+	/*
+	public void addRoleToUser(String username, Role role){
+        User user = userRepository.findByUsername(username);
+        if (user != null && role != null) {
+            if (user.getRoles() == null) {
+                user.setRoles(new ArrayList<>()); // Initialisation de la liste si elle est null
+            }
+            user.getRoles().add(role);
+            userRepository.save(user);
+        }
+    }
+	 */
+	@Autowired
+	AccountServiceImp account;
+	@Autowired
+	RoleRepository roleRepository;
+	@Test
+	public void TestAddRoleToUser(){
+		Role r= roleRepository.findById("Person").get();
+		account.addRoleToUser("P9218_INCHALLAHINCHALLAH",r);
 	}
 }

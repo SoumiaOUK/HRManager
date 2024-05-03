@@ -46,22 +46,32 @@
     <br>
 
     <div class="row g-5">
+      <!--
       <div class="col">
         <div data-mdb-input-init class="form-outline">
           <label for="solde_conge">Solde Conge : </label>
           <input type="text" name="soldeConges" id="solde_conge">
         </div>
       </div>
+      -->
       <div class="col">
         <div data-mdb-input-init class="form-outline">
           <label for="role">Role : </label>
           <select id="role" name="role">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
           </select>
         </div>
       </div>
+      <div class="col">
+      <div data-mdb-input-init class="form-outline">
+        <label for="myManager" class="form-label">myManager</label>
+        <select id="myManager" name="myManager" class="form-select" required>
+          <option th:each="manager : ${managers}" th:value="${manager.idPerson}" th:text="${manager.idPerson}"></option>
+        </select>
+        <div class="invalid-feedback">Please select a manager for this new employee</div>
+      </div>
+      </div>
+
     </div>
     <br>
     <input type="submit" value="Enregistrer">

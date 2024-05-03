@@ -18,6 +18,16 @@ public class Person {
   //  @NotNull
     protected String email;
     protected String departement;
+    protected String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     //one person can have many LeaveRequest
     @OneToMany(mappedBy="person")
     private List<LeaveRequest> leaves;
@@ -27,7 +37,40 @@ public class Person {
     @OneToOne(mappedBy = "personne")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "idManager",nullable = false)
+    private Manager myManager;
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "idPerson=" + idPerson +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", departement='" + departement + '\'' +
+                ", leaves=" + leaves +
+                ", absences=" + absences +
+                "role"+role+
+
+                '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Manager getMyManager() {
+        return myManager;
+    }
+
+    public void setMyManager(Manager myManager) {
+        this.myManager = myManager;
+    }
 
     public Person() {
     }

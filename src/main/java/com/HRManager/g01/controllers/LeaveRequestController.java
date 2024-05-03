@@ -2,10 +2,7 @@ package com.HRManager.g01.controllers;
 import com.HRManager.g01.entities.LeaveRequest;
 import com.HRManager.g01.entities.LeaveType;
 import com.HRManager.g01.enums.LeaveRequestStatus;
-import com.HRManager.g01.services.EmployeService;
-import com.HRManager.g01.services.LeaveReqService;
-import com.HRManager.g01.services.LeaveTypeService;
-import com.HRManager.g01.services.ManagerService;
+import com.HRManager.g01.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +22,7 @@ public class LeaveRequestController {
     @Autowired
     ManagerService managerService;
     @Autowired
-    EmployeService empService;
+    EmployeServiceImp empService;
     @RequestMapping("/createLeaveReq")
     public String createLeaveReq(Model model) {
         List<LeaveType> leaveTypes = leaveTypeService.getLeaveTypes();

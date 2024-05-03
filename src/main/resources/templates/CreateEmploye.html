@@ -55,9 +55,7 @@
         <div data-mdb-input-init class="form-outline">
           <label for="role">Role : </label>
           <select id="role" name="role">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            <option th:each="role : ${role}" th:value="${role.role}" th:text="${role.role}"></option>
           </select>
         </div>
       </div>

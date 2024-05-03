@@ -1,6 +1,7 @@
 package com.HRManager.g01.security.services;
 
 
+import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.entities.User;
 import com.HRManager.g01.security.repositories.RoleRepository;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -27,6 +29,8 @@ public class AccountServiceImp implements AccountService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    RoleServiceImp roleServiceImp;
 
 
     @Override
@@ -37,11 +41,15 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public void addRoleToUser(String username, String role){
+    public void addRoleToUser(String username, Role role){
         User user = userRepository.findByUsername(username);
-        Role hisRole = roleRepository.findById(role).orElse(null);
-        user.getRoles().add(hisRole);
-
+        if (user != null && role != null) {
+            if (user.getRoles() == null) {
+                user.setRoles(new ArrayList<>()); // Initialisation de la liste si elle est null
+            }
+            user.getRoles().add(role);
+            userRepository.save(user);
+        }
     }
 
     @Override
@@ -96,8 +104,8 @@ public class AccountServiceImp implements AccountService {
 
 @Autowired EmailServiceImp sendEmail;
     @Override
-    public User createUser(String firstName, String lastName,String email) {
-        String username=usernameGenerator(firstName,lastName);
+    public User createUser(Person person) {
+        String username=usernameGenerator(person.getFirstName(),person.getLastName());
         //verify that the username doesn't exist because it's unique
         if(userRepository.findByUsername(username)!=null) throw new RuntimeException("Error : username already exists!");
 
@@ -107,10 +115,11 @@ public class AccountServiceImp implements AccountService {
                 .userId(UUID.randomUUID().toString())
                 .username(username)
                 .password(passwordEncoder.encode(password))
+                .personne(person)
                 .build();
         System.out.println(user.toString());
         try{
-            sendEmail.sendEmail(email,"Your Credentials For HRManager",username+" "+password);
+            sendEmail.sendEmail(person.getEmail(),"Your Credentials For HRManager",username+" "+password);
         }catch (Exception e) {
             System.out.println("ERROR SENDING EMAIL CREDENTIALS : " + e.getMessage() + "USERNAME : " + username + "PASSWORD : " + password);
         }

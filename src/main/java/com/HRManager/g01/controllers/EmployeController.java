@@ -1,6 +1,9 @@
 package com.HRManager.g01.controllers;
 import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.security.entities.Role;
+import com.HRManager.g01.security.services.RoleServiceImp;
 import com.HRManager.g01.services.EmployeService;
+import com.HRManager.g01.services.EmployeServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +17,13 @@ import java.util.List;
 //intermediare avec service
 public class EmployeController {
     @Autowired
-    EmployeService empService;
+    RoleServiceImp roleServiceImp;
+    @Autowired
+    EmployeServiceImp empService;
     @RequestMapping("/createEmploye")
-    public String createEmploye(){
+    public String createEmploye(ModelMap modelMap){
+        List<Role> roles= roleServiceImp.getRoles();
+        modelMap.addAttribute("roles",roles);
         return "CreateEmploye";
     }
     //comment le controller communique avec les vues

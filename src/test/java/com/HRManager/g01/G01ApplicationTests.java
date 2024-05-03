@@ -2,11 +2,17 @@ package com.HRManager.g01;
 
 import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.entities.LeaveRequest;
+import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.repositories.EmployeRepository;
 import com.HRManager.g01.repositories.LeaveRequestRepository;
+import com.HRManager.g01.security.services.AccountService;
+import com.HRManager.g01.security.services.AccountServiceImp;
+import com.HRManager.g01.security.services.EmailServiceImp;
 import com.HRManager.g01.services.LeaveReqService;
+import com.HRManager.g01.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -16,10 +22,11 @@ class G01ApplicationTests {
 
 	@Autowired
 	EmployeRepository empRepo;
+	@Autowired
+	PersonService personeServiceImp;
 	@Test
-	public void TestCreateEmploye(){
-		Employe emp = new Employe();
-		empRepo.save(emp);
+	public void TestCreatePerson(){
+		personeServiceImp.savePerson(new Person("Souumia","ok","soumiaoukhira66@gmail.com","IT","MANAGER"));
 	}
 	/*
 	//pourquoi cette méthode m'ajoute une nouvelle ligne dans DB
@@ -71,5 +78,33 @@ class G01ApplicationTests {
 	public void TestAcceptLeave(){
 		leaveReqService.acceptLeaveRequest(3);
 		System.out.println("done");
+	}
+
+
+	@Autowired
+	AccountServiceImp securityService;
+	@Test
+	public void TestUsernameGenerator(){
+		System.out.println(securityService.usernameGenerator("soumia","Oukhira"));
+
+	}
+	@Test
+	public void TestPasswordGenerator(){
+		System.out.println(securityService.generateRandomPassword());;
+	}
+
+	@Test
+	public void TestCreateUser(){
+		securityService.createUser("souuumia","ouuukhira","soumiaoukhira66@gmail.com");
+	}
+	@Autowired
+	EmailServiceImp emailSender;
+
+	@Test
+	public void TestSendEmail(){
+		emailSender.sendEmail("so.oukhira@gmail.com","hello","hey everyone");
+
+		emailSender.sendEmail("soumiaoukhira66@gmail.com","hello","hey everyone");
+
 	}
 }

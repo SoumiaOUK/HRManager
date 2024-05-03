@@ -29,13 +29,15 @@ public class EmployeController {
         }
         //faire passer info from DB to th
         Employe memo = empService.saveEmploye(employe);
-         return "CreateEmploye";
+        return "redirect:/createEmploye"; // Redirect to the createEmploye page after successful save
     }
     @RequestMapping("/employeList")
     public String employeList(ModelMap modelMap){
         List<Employe> listEmp = empService.getAllEmployees();
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("empTh",listEmp);
+        System.out.println("print employees to console\n ");
+        listEmp.forEach(System.out::println);
         //retourn nom d'une view qu'on va chercher dans Views
         return "EmployeList";
     }
@@ -62,7 +64,6 @@ public class EmployeController {
         Employe emp=empService.getEmploye(idPerson);
         modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
-
-
     }
+
 }

@@ -1,16 +1,26 @@
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
-  <title>Th-Add Employe</title>
+  <title>Th-Add Person</title>
 <head>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
 
 </head>
 <body>
-<h1>Add Employe</h1>
+<h1>Add Person</h1>
 <br>
-<form th:action="@{saveEmploye}" method="post">
+<form th:action="@{savePerson}" method="post">
   <div>
     <!-- Add this block to display the error message -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+      <p th:text="${errorMessage}"></p>
+    </div>
 
+    <div th:if="${#fields.hasErrors('*')}">
+      <ul>
+        <li th:each="field : ${#fields.detailedErrors()}">
+          <span th:text="${field.objectName}"></span> - <span th:text="${field.field}"></span>: <span th:text="${field.message}"></span>
+        </li>
+      </ul>
+    </div>
 
     <div class="row g-5">
       <div class="col">
@@ -53,11 +63,10 @@
       </div>
       <div class="col">
         <div data-mdb-input-init class="form-outline">
-          <label for="role">Role : </label>
-          <select id="role" name="role">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+          <label for="position">Role : </label>
+          <select id="position" name="position" for="position">
+            <option value="EMPLOYE">EMPLOYE</option>
+            <option value="MANAGER">MANAGER</option>
           </select>
         </div>
       </div>
@@ -67,7 +76,7 @@
   </div>
   <br>
   <footer>
-    <a href="employeList" />Liste employes
+    <a href="personList" />Liste persons
   </footer>
 
 </form>

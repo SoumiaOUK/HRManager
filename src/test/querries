@@ -5,4 +5,4 @@ INSERT INTO person (`position`,`id_person`,`departement`,`email`,`first_name`,`l
 //add employee
 INSERT INTO person (`position`,`id_person`,`departement`,`email`,`first_name`,`last_name`,`role`,`solde_conges`)VALUES("EMPLOYE",2,"IT","soEmploye@gmail.com","soumia","employe","employe",10);
 //add leave types:
-INSERT INTO leave_type (id_type, description, duration, libelle) VALUES (1, 'Annual Leave', 1, 'Annual'), (2, 'Sick Leave', 2, 'Sick'), (3, 'Maternity Leave', 18, 'Maternity');
+INSERT INTO leave_type (id_type, description, duration, labelle) VALUES (1, 'Annual Leave', 1, 'Annual'), (2, 'Sick Leave', 2, 'Sick'), (3, 'Maternity Leave', 18, 'Maternity');

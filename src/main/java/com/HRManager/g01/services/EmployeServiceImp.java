@@ -10,7 +10,6 @@ import java.util.List;
 public class EmployeServiceImp implements EmployeService{
     @Autowired
     EmployeRepository empRep ;
-
     @Override
     public Employe saveEmploye(Employe emp) {
         return empRep.save(emp);

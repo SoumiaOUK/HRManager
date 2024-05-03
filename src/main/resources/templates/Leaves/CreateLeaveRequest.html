@@ -1,65 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css"> <!-- Ajouter votre fichier CSS personnalisé ici -->
   <title>Create Leave Request</title>
 </head>
 <body>
-<form th:action="@{saveLeaveReq}" method="post">
-  <!-- Add this block to display the error message -->
-  <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-    <p th:text="${errorMessage}"></p>
-  </div>
 
-  <label hidden="hidden" for="idLeave">idLeave</label>
-  <input hidden="hidden" type="text" id="idLeave" name="idLeave" for="idLeave">
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Create Leave Request</h2>
 
-  <label for="startDate">Start Date:</label>
-  <input type="date" id="startDate" name="startDate"/>
+  <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate>
 
-  <label for="endDate">End Date:</label>
-  <input type="date" id="endDate" name="endDate"/>
+    <!-- Affichage du message d'erreur -->
+    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error!</strong> <span th:text="${errorMessage}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
+    <!-- Champs de formulaire -->
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date:</label>
+      <input type="date" id="startDate" name="startDate" class="form-control" required/>
+      <div class="invalid-feedback">Please provide a valid start date.</div>
+    </div>
 
-  <label for="reason">Reason</label>
-  <input type="text" id="reason" name="reason" for="reason">
+    <div class="mb-3">
+      <label for="endDate" class="form-label">End Date:</label>
+      <input type="date" id="endDate" name="endDate" class="form-control" required/>
+      <div class="invalid-feedback">Please provide a valid end date.</div>
+    </div>
 
-  <label for="commentaire">Commentaire</label>
-  <input type="text" id="commentaire" name="commentaire" for="commentaire">
+    <div class="mb-3">
+      <label for="reason" class="form-label">Reason:</label>
+      <input type="text" id="reason" name="reason" class="form-control" required/>
+      <div class="invalid-feedback">Please provide a reason for leave.</div>
+    </div>
 
+    <div class="mb-3">
+      <label for="commentaire" class="form-label">Commentaire:</label>
+      <input type="text" id="commentaire" name="commentaire" class="form-control"/>
+    </div>
 
+    <div class="mb-3">
+      <label for="leaveType" class="form-label">Leave Types:</label>
+      <select id="leaveType" name="leaveType" class="form-select" required>
+        <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType.idType}" th:text="${leaveType.labelle}"></option>
+      </select>
+      <div class="invalid-feedback">Please select a leave type.</div>
+    </div>
 
+    <!-- Bouton Soumettre -->
+    <button type="submit" class="btn btn-primary">Submit</button>
 
-  <label for="leaveType">Leave Types:</label>
-  <select id="leaveType" name="leaveType">
-    <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType.idType}" th:text="${leaveType.libelle}"></option>
-  </select><br>
- <button type="submit">Submit</button>
-</form>
-<!--
+  </form>
+</div>
 
-==id_leave
-commentaire
-==end_date
-==reason
-==start_date
-====status
-==id_type
-id_manager
-id_person
-duration
+<!-- Scripts Bootstrap -->
+<script src="webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 
-
-
-validationrh
-approuved_date
-signature
-status
-
-
-
-
--->
 </body>
 </html>

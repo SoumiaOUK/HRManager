@@ -1,4 +1,5 @@
 package com.HRManager.g01.entities;
+import com.HRManager.g01.security.entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
@@ -23,6 +24,9 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Absence> absences;
 
+    @OneToOne(mappedBy = "personne")
+    private User user;
+
 
 
     public Person() {
@@ -36,6 +40,13 @@ public class Person {
         this.departement = departement;
         this.leaves = leaves;
         this.absences = absences;
+    }
+    public Person(String firstName, String lastName, String email, String departement, String position) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departement = departement;
     }
 
     public Long getIdPerson() {
@@ -94,4 +105,12 @@ public class Person {
     public void setAbsences(List<Absence> absences) {
         this.absences = absences;
     }
+    public String getDiscriminatorValue() {
+        DiscriminatorValue discriminatorValue = this.getClass().getAnnotation(DiscriminatorValue.class);
+        if (discriminatorValue != null) {
+            return discriminatorValue.value();
+        }
+        return null;
+    }
+
 }

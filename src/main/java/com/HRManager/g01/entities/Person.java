@@ -1,18 +1,23 @@
 package com.HRManager.g01.entities;
 import com.HRManager.g01.security.entities.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
+@Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "position", discriminatorType = DiscriminatorType.STRING)
-
 public class Person {
+
     @Id
     //SGBD  = Identity
     //par implementation = AUTO
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long idPerson;
+    private int soldeConges;
     protected String firstName;
     protected String lastName;
   //  @NotNull
@@ -20,8 +25,8 @@ public class Person {
     protected String departement;
     protected String role;
 
-    public String getRole() {
-        return role;
+    public void setSoldeConges(int soldeConges) {
+        this.soldeConges = soldeConges;
     }
 
     public void setRole(String role) {
@@ -29,18 +34,19 @@ public class Person {
     }
 
     //one person can have many LeaveRequest
-    @OneToMany(mappedBy="person")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="person")
     private List<LeaveRequest> leaves;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "person")
     private List<Absence> absences;
 
-    @OneToOne(mappedBy = "personne")
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "personne")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "idManager",nullable = false)
     private Manager myManager;
 
+    /*
     @Override
     public String toString() {
         return "Person{" +
@@ -56,16 +62,12 @@ public class Person {
                 '}';
     }
 
-    public User getUser() {
-        return user;
-    }
+
+     */
+
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Manager getMyManager() {
-        return myManager;
     }
 
     public void setMyManager(Manager myManager) {
@@ -75,8 +77,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long idPerson, String firstName, String lastName, String email, String departement, String position, List<LeaveRequest> leaves, List<Absence> absences) {
-        this.idPerson = idPerson;
+    public Person(String firstName, String lastName, String email, String departement, String position, List<LeaveRequest> leaves, List<Absence> absences) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -92,40 +93,44 @@ public class Person {
         this.departement = departement;
     }
 
-    public Long getIdPerson() {
-        return idPerson;
+    public Person(int soldeConges, String firstName, String lastName, String email, String departement, String role, Manager myManager) {
+        this.soldeConges = soldeConges;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departement = departement;
+        this.role = role;
+        this.myManager = myManager;
+    }
+
+    public Person(Long idPerson, int soldeConges, String firstName, String lastName, String email, String departement, String role, List<LeaveRequest> leaves, List<Absence> absences, User user, Manager myManager) {
+        this.idPerson = idPerson;
+        this.soldeConges = soldeConges;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departement = departement;
+        this.role = role;
+        this.leaves = leaves;
+        this.absences = absences;
+        this.user = user;
+        this.myManager = myManager;
     }
 
     public void setIdPerson(Long idPerson) {
         this.idPerson = idPerson;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getDepartement() {
-        return departement;
     }
 
     public void setDepartement(String departement) {
@@ -133,16 +138,8 @@ public class Person {
     }
 
 
-    public List<LeaveRequest> getLeaves() {
-        return leaves;
-    }
-
     public void setLeaves(List<LeaveRequest> leaves) {
         this.leaves = leaves;
-    }
-
-    public List<Absence> getAbsences() {
-        return absences;
     }
 
     public void setAbsences(List<Absence> absences) {
@@ -154,6 +151,17 @@ public class Person {
             return discriminatorValue.value();
         }
         return null;
+    }
+    @Override
+    public String toString() {
+        return " firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", departement='" + departement + '\'' +
+                ", role='" + role + '\'' +
+                ", leaves=" + leaves +
+                ", absences=" + absences +
+                '}';
     }
 
 }

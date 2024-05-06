@@ -2,20 +2,23 @@ package com.HRManager.g01;
 
 import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.entities.LeaveRequest;
+import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.repositories.EmployeRepository;
 import com.HRManager.g01.repositories.LeaveRequestRepository;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.repositories.RoleRepository;
 import com.HRManager.g01.security.services.*;
-import com.HRManager.g01.services.LeaveReqService;
-import com.HRManager.g01.services.ManagerServiceImp;
-import com.HRManager.g01.services.PersonService;
+import com.HRManager.g01.services.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -23,8 +26,11 @@ class G01ApplicationTests {
 
 	@Autowired
 	EmployeRepository empRepo;
+
 	@Autowired
-	PersonService personeServiceImp;
+	EmployeServiceImp empService;
+	@Autowired
+	PersonServiceImp personeServiceImp;
 	/*
 	@Test
 	public void TestCreatePerson(){
@@ -66,18 +72,9 @@ class G01ApplicationTests {
 
 	@Autowired
 	LeaveRequestRepository leaveRepo;
-	@Test
-	public void TestShowEmpLeaves(){
-		List<LeaveRequest> myLeaves= leaveRepo.listLeavesByEmp(3);
-		myLeaves.forEach(System.out::println);
-	}
-	@Test
-	public void TestShowLeavesByManager(){
-		List<LeaveRequest> managedLeaves=leaveRepo.listLeavesByMan(1);
-		managedLeaves.forEach(System.out::println);
-	}
+
 	@Autowired
-	LeaveReqService leaveReqService;
+	LeaveReqServiceImp leaveReqService;
 	@Test
 	public void TestAcceptLeave(){
 		leaveReqService.acceptLeaveRequest(3);
@@ -151,4 +148,68 @@ class G01ApplicationTests {
 		Role r= roleRepository.findById("Person").get();
 		account.addRoleToUser("P9218_INCHALLAHINCHALLAH",r);
 	}
+
+
+	//for home page we need to count the number of employees and leave requests
+	@Test
+	public void TestCount(){
+		System.out.println("\n count employees = "+empService.countEmployees());
+		System.out.println("\n count leave requests = "+leaveReqService.countLeaves());
+
+	}
+
+	//tester creation d'une person "employee " et "manager"
+	@Autowired
+	ManagerServiceImp managerServiceImp;
+	@Test
+	public void TestSavePerson(){
+		Manager man=managerServiceImp.getManagerById(1);
+		//  int soldeConges, String firstName, String lastName, String email, String departement, String role, Manager myManager) {
+		Person pEmploye=new Person(12,"khadija","oukhira","soumiaoukhira66@gmail.com","IT","EMPLOYE",man);
+		//create employe
+		personeServiceImp.savePerson(pEmploye,"EMPLOYE");
+		//create manager
+		Person pManager=new Person(13,"hammou","oukhira","soumiaoukhira66@gmail.com","IT","MANAGER",man);
+		//create employe
+		personeServiceImp.savePerson(pManager,"MANAGER");
+	}
+
+	@Test
+	public void TestgetAllEmployees(){
+		List<Employe> employees= empService.getAllEmployees();
+		employees.forEach(System.out::println);
+	}
+	@Test
+	public void TestShowEmpLeaves(){
+		List<LeaveRequest> myLeaves= leaveRepo.listLeavesByEmp(3);
+		myLeaves.forEach(System.out::println);
+	}
+	@Test
+	public void TestShowLeavesByManager(){
+		List<LeaveRequest> managedLeaves=leaveRepo.listLeavesByMan(1);
+		managedLeaves.forEach(System.out::println);
+	}
+
+	@Test
+	public void TestAddLeave(){
+		Date datestart = new Date(2024,1,20);
+		Date datefin = new Date(2024,4,20);
+
+		LeaveRequest newleave = new LeaveRequest(datestart,datefin,"sick","sick");
+		leaveReqService.saveLeave(newleave);
+	}
+
+	@Autowired
+	LeaveProofServiceImp leaveProofServiceImp;
+	@Test
+	public void TestAssignProofToLeave(){
+		Integer i = 2;
+		Long l = i.longValue();
+		leaveProofServiceImp.assignProofToLeave(l,l);
+	}
+
+
+
+
+
 }

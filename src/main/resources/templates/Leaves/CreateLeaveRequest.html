@@ -7,18 +7,14 @@
   <title>Create Leave Request</title>
 </head>
 <body>
-
 <div class="container mt-5">
   <h2 class="text-center mb-4">Create Leave Request</h2>
-
-  <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate>
-
+  <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
     <!-- Affichage du message d'erreur -->
     <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong>Error!</strong> <span th:text="${errorMessage}"></span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
     <!-- Champs de formulaire -->
     <div class="mb-3">
       <label for="startDate" class="form-label">Start Date:</label>
@@ -51,21 +47,17 @@
       <div class="invalid-feedback">Please select a leave type.</div>
     </div>
     <div class="mb-3">
-      <label for="manager" class="form-label">Manager</label>
-      <select id="manager" name="manager" class="form-select" required>
-        <option th:each="manager : ${managers}" th:value="${manager.idPerson}" th:text="${manager.firstName}"></option>
-      </select>
+      <label for="leaveType" class="form-label">Leave Proof</label>
+
+      <input type="file" name="file" />
+
       <div class="invalid-feedback">Please select a leave type.</div>
     </div>
-
     <!-- Bouton Soumettre -->
     <button type="submit" class="btn btn-primary">Submit</button>
-
   </form>
 </div>
-
 <!-- Scripts Bootstrap -->
 <script src="webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

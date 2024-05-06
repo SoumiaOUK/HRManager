@@ -20,4 +20,8 @@ public class ManagerServiceImp implements ManagerService{
     public List<Manager> getAllManagers(){
         return managerRep.findAll();
     }
+
+    @Override
+    public Manager saveManager(Manager manager){return managerRep.save(manager);}
+
 }

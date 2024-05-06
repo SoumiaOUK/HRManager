@@ -35,7 +35,7 @@ public class SecurityConfig{
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authCustomizer -> authCustomizer
-                                .requestMatchers("listLeaves").hasRole("MANAGER")
+                                //.requestMatchers("listLeaves").hasRole("MANAGER")
                                 .requestMatchers("/createEmploye").hasRole("EMPLOYE")
                                 .anyRequest().permitAll()
                 )

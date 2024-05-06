@@ -1,14 +1,15 @@
 package com.HRManager.g01.repositories;
-
-import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.entities.LeaveProof;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface EmployeRepository extends JpaRepository<Employe,Long> {
+public interface LeaveProofRepo extends JpaRepository<LeaveProof,Long> {
     @Query(
-            value = "select count(*) from person where role =\"EMPLOYE\";",
+            value = "select * from leave_proof WHERE leaveReqId=?1",
             nativeQuery = true)
-    int countEmployees();
+    LeaveProof leaveProofByIdReq(long id);
 }

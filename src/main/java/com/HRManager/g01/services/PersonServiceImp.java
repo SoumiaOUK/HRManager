@@ -1,5 +1,7 @@
 package com.HRManager.g01.services;
 
+import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.repositories.PersonRepository;
 import com.HRManager.g01.security.entities.Role;
@@ -18,11 +20,26 @@ public class PersonServiceImp implements PersonService{
     AccountServiceImp account;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    EmployeServiceImp employeServiceImp;
+    @Autowired
+    ManagerServiceImp managerServiceImp;
 
     @Override
     public Person savePerson(Person person,String role) {
+        Person p = null;
+        if (role.equals("EMPLOYE")){
+            Employe emp= new Employe(person.getSoldeConges(),person.getFirstName(),person.getLastName(),person.getEmail(),person.getDepartement(),person.getRole(),person.getMyManager());
+             p=employeServiceImp.saveEmploye(emp);
+            System.out.println("employee created"+p.toString());
+        } else if (role.equals("MANAGER")) {
+            Manager manager= new Manager(person.getSoldeConges(),person.getFirstName(),person.getLastName(),person.getEmail(),person.getDepartement(),person.getRole(),person.getMyManager());
+            p=managerServiceImp.saveManager(manager);
+            System.out.println("manager created"+p.toString());
+        }
 
-        Person p = personRep.save(person);
+        //Person p = personRep.save(person);
+
         if(p!=null){
             User user = account.createUser(person);
             System.out.println("jgskggsdvf'"+p.getDiscriminatorValue());
@@ -32,9 +49,10 @@ public class PersonServiceImp implements PersonService{
             System.out.println("\n \n \n Assigned role"+roleAssigned);
             System.out.println("P.getdiscriminatorValue"+p.getDiscriminatorValue());
         }
+
+
         return p;
     }
-
     @Override
     public Person updatePerson(Person emp) {
         return personRep.save(emp);
@@ -57,4 +75,14 @@ public class PersonServiceImp implements PersonService{
 
     @Override
     public void deleteAllPerson() {personRep.deleteAll();}
+
+    @Override
+    public List<Employe> listEmployees(){
+        return personRep.listEmployees();
+    }
+
+    @Override
+    public List<Manager> listManagers(){
+        return personRep.listManagers();
+    }
 }

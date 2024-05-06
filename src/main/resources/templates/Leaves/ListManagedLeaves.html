@@ -36,6 +36,7 @@
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
     <tr>
+        <th>Employe</th>
         <th>Start At</th>
         <th>End At</th>
         <th>Duration</th>
@@ -48,6 +49,7 @@
     </thead>
     <tbody>
     <tr th:each="leave : ${leaves}">
+        <td th:text="${leave.person.firstName+' '+leave.person.lastName}"></td>
         <td th:text="${leave.startDate}"></td>
         <td th:text="${leave.endDate}"></td>
         <td th:text="${leave.duration}"></td>
@@ -62,6 +64,10 @@
             <a th:href="@{rejectLeave(id=${leave.idLeave})}">
                 <button class="btn btn-reject" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal"><i class="bi bi-x-lg"></i></button>
             </a>
+            <a th:href="@{downloadProof(id=${leave.leaveProof.getIdLeaveProof()})}">
+                <button class="btn btn-reject" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal"><i class="bi bi-download"></i></i></button>
+            </a>
+
         </td>
     </tr>
     </tbody>

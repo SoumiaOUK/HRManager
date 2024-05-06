@@ -8,4 +8,6 @@ import java.util.List;
 public interface ManagerService {
     public Manager getManagerById(long id);
     public List<Manager> getAllManagers();
+
+    Manager saveManager(Manager manager);
 }

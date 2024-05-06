@@ -39,4 +39,9 @@ public class EmployeServiceImp implements EmployeService{
     public void deleteAllEmploye() {
         empRep.deleteAll();
     }
+
+    @Override
+    public int countEmployees(){
+        return empRep.countEmployees();
+    }
 }

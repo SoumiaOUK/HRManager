@@ -12,4 +12,6 @@ public interface EmployeService {
     List<Employe> getAllEmployees();
     void deleteEmployeById(Long Id);
     void deleteAllEmploye();
+
+    int countEmployees();
 }

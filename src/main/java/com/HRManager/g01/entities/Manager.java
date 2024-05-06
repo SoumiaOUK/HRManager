@@ -14,13 +14,19 @@ public class Manager extends Person{
 
     @OneToMany(mappedBy = "idPerson",fetch = FetchType.EAGER)
     private List<Person> personnelle;
-    public Manager(Long idPerson, String firstName, String lastName, String email, String departement, String position, List<LeaveRequest> leaves, List<Absence> absences, List<LeaveRequest> leaves1) {
+   /* public Manager(Long idPerson, String firstName, String lastName, String email, String departement, String position, List<LeaveRequest> leaves, List<Absence> absences, List<LeaveRequest> leaves1) {
         super(idPerson, firstName, lastName, email, departement, position, leaves, absences);
         this.leaves = leaves1;
     }
 
+    */
+
     public Manager() {
 
+    }
+
+    public Manager(int soldeConges, String firstName, String lastName, String email, String departement, String role, Manager myManager) {
+        super(soldeConges, firstName, lastName, email, departement, role, myManager);
     }
 
     @Override

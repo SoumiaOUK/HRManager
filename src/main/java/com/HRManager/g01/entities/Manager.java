@@ -9,6 +9,10 @@ import java.util.List;
 public class Manager extends Person{
 
 
+
+    @OneToMany(mappedBy = "idBonus")
+    private List<Bonus> bonus;
+
     @OneToMany(mappedBy = "idLeave")
     private List<LeaveRequest> leaves;
 

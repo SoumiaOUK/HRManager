@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Bonus</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+        <h1 class="my-4">List Managed Bonuses</h1>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>Recipient</th>
+                <th>Task</th>
+                <th>Ammount</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bonus : ${bonuses}" class="table-row">
+                <td>
+                    <span th:text="${bonus.RecipientID.getFirstName()}"></span>
+                    <span th:text="${bonus.RecipientID.getLastName()}"></span>
+                </td>
+                <td th:text="${bonus.task.getDescription()}"></td>
+                <td th:text="${bonus.ammount}"></td>
+                <td th:text="${bonus.awardDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

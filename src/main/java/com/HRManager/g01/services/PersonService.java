@@ -13,4 +13,5 @@ public interface PersonService {
     void deleteAllPerson();
     List<Employe> listEmployees();
     List<Manager> listManagers();
+    List<Employe> getlistEmpByManager();
 }

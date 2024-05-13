@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Employe Tasks</title>
+</head>
+<body>
+<div layout:fragment="content">
+<header>
+    <h1>Employe's Tasks</h1>
+    <br>
+</header>
+<main>
+    <div th:fragment="tasksByExecutorSection">
+    <table class="table table-striped table-hover">
+        <thead class="bg-light">
+        <tr>
+            <th>Task Name</th>
+            <th>Priority</th>
+            <th>Executors</th>
+            <th>Task Deadline</th>
+            <th>Status</th>
+            <th>Appreciation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task:${tasks}">
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.priority}"></td>
+            <td>
+               <span th:each="executor, iterStat : ${task.taskCompleters}">
+                <span th:text="${executor.firstName + ' ' + executor.lastName}"></span>
+                <span th:if="${!iterStat.last}"><br></span>
+                </span>
+            </td>
+            <td th:text="${task.dueDate}"></td>
+            <td th:text="${task.status}"></td>
+            <td th:text="${task.Appreciation}"></td>
+            <!--
+                <td><a th:href="@{deleteEmploye(id=${employe.idPerson})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
+                <td><a th:href="@{showEmploye(id=${employe.idPerson})}">modifier</a></td>
+            -->
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</main>
+</div>
+</body>
+</html>

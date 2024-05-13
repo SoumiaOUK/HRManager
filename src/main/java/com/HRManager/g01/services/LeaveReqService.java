@@ -16,7 +16,8 @@ public interface LeaveReqService {
     //
     public LeaveRequest readLeaveReq(Long id);
     //read Leave
-    public List<LeaveRequest> getLeavesByEmp();
+    public List<LeaveRequest> getMyLeaves();
+    List<LeaveRequest> getLeavesByEmp(Long id);
     public List<LeaveRequest> getLeavesByMan();
     //update Leave
     public LeaveRequest updateLeaveRequest(LeaveRequest leaveReq);

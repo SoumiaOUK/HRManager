@@ -1,4 +1,7 @@
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
 <head>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
@@ -6,6 +9,8 @@
     <title>Th - Employe List</title>
 </head>
 <body>
+<div layout:fragment="content">
+
 <header>
     <h1>Employe List</h1>
     <br>
@@ -49,5 +54,6 @@
 
 
 </footer>
+</div>
 </body>
 </html>

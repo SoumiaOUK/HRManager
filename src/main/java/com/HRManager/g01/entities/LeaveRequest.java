@@ -20,7 +20,6 @@ public class LeaveRequest {
     private Date startDate;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-
     private Date endDate;
 
     private int duration;

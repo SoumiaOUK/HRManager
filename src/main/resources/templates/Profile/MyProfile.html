@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Details</title>
+  <script>
+    function toggleTasks() {
+      var tasksSection = document.getElementById("tasksSection");
+      tasksSection.classList.toggle("hidden");
+    }
+  </script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .profile-field {
+      margin-bottom: 15px;
+      overflow-wrap: break-word;
+    }
+
+    .profile-label {
+      font-weight: bold;
+    }
+
+    .profile-value {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+<div layout:fragment="content">
+  <div>
+    <h1>Employe's informations</h1>
+    <div class="profile-container">
+      <img class="profile-image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fvecteurs-premium%2Favatar-employe-bureau-dans-style-dessin-anime-dessin-anime-avatar-femme-bureau_137398715.htm&psig=AOvVaw1eFUctW63OTvJH3KziaWSE&ust=1715593908070000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJC50r3rh4YDFQAAAAAdAAAAABAJ" alt="Profile Image">
+      <div class="profile-field">
+        <span class="profile-label">Department:</span>
+        <span class="profile-value">[[${profile.departement}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Email:</span>
+        <span class="profile-value">[[${profile.email}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">First Name:</span>
+        <span class="profile-value">[[${profile.firstName}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Last Name:</span>
+        <span class="profile-value">[[${profile.lastName}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Role:</span>
+        <span class="profile-value">[[${profile.role}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Solde Conges:</span>
+        <span class="profile-value">[[${profile.soldeConges}]]</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">ID Manager:</span>
+        <span class="profile-value">[[${profile.myManager.getLastName}]]</span>
+        <span class="profile-value">[[${profile.myManager.getFirstName}]]</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h1 onclick="toggleTasks()">Employee's tasks &#9660;</h1>
+    <div id="tasksSection" class="hidden">
+      <!-- Include the fragment -->
+    <div th:replace="Tasks/TasksByExecutor :: tasksByExecutorSection"></div>
+    </div>
+  </div>
+  <div>
+    <h1>
+      Employe's Bonuses
+    </h1>
+    <div th:replace="Bonus/ListBonusByEmp :: BonusByExecutorSection"></div>
+
+  </div>
+  <div>
+    <h1>
+      Employe's Leaves
+    </h1>
+    <div th:replace="Leaves/ListLeavesByEmp :: LeaveByExecutorSection"></div>
+
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,9 +1,11 @@
 package com.HRManager.g01.controllers;
 import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.services.RoleServiceImp;
 import com.HRManager.g01.services.EmployeService;
 import com.HRManager.g01.services.EmployeServiceImp;
+import com.HRManager.g01.services.ManagerServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,15 @@ public class EmployeController {
     RoleServiceImp roleServiceImp;
     @Autowired
     EmployeServiceImp empService;
+    @Autowired
+    ManagerServiceImp managerServiceImp;
     @RequestMapping("/createEmploye")
     public String createEmploye(ModelMap modelMap){
+        //List<Manager> managers = managerServiceImp.getAllManagers();
+        //modelMap.addAttribute("managers",managers);
+        //managers.forEach(System.out::println);
         List<Role> roles= roleServiceImp.getRoles();
+        roles.forEach(System.out::println);
         modelMap.addAttribute("roles",roles);
         return "CreateEmploye";
     }
@@ -40,7 +48,7 @@ public class EmployeController {
     }
     @RequestMapping("/employeList")
     public String employeList(ModelMap modelMap){
-        List<Employe> listEmp = empService.getAllEmployees();
+        List<Employe> listEmp = empService.getEmployeesByManager();
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("empTh",listEmp);
         System.out.println("print employees to console\n ");
@@ -51,7 +59,7 @@ public class EmployeController {
     @RequestMapping("/deleteEmploye")
     public String deleteEmploye(@RequestParam("id") Long id,ModelMap modelMap){
         empService.deleteEmployeById(id);
-        List<Employe> listEmp = empService.getAllEmployees();
+        List<Employe> listEmp = empService.getEmployeesByManager();
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("empTh",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views
@@ -59,7 +67,9 @@ public class EmployeController {
     }
     @RequestMapping("/showEmploye")
     public String showEmploye(@RequestParam("id") Long id ,ModelMap modelMap){
+        System.out.println("\n id :   "+id);
         Employe emp = empService.getEmploye(id);
+        System.out.println("employe   :   "+emp.toString());
         modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
     }
@@ -67,10 +77,9 @@ public class EmployeController {
     public String updateEmploye( @ModelAttribute("employe") Employe employe,@RequestParam("idPerson") Long idPerson,ModelMap modelMap){
         System.out.println("\n id employe to update "+idPerson);
         System.out.println("**************"+employe.getDepartement());
-        empService.saveEmploye(employe);
+        empService.updateEmploye(employe);
         Employe emp=empService.getEmploye(idPerson);
         modelMap.addAttribute("empTh",emp);
-        return "EditEmploye";
+        return "redirect:/employeList";
     }
-
 }

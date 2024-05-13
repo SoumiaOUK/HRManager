@@ -25,7 +25,4 @@ public class G01Application {
 	public static void main(String[] args) {
 		SpringApplication.run(G01Application.class, args);
 	}
-
-
-
 }

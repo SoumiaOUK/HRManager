@@ -1,17 +1,19 @@
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
   <title>Th-Add Employe</title>
 <head>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
-
 </head>
 <body>
+
+<div layout:fragment="content">
 <h1>Add Employe</h1>
 <br>
 <form th:action="@{saveEmploye}" method="post">
   <div>
     <!-- Add this block to display the error message -->
-
-
     <div class="row g-5">
       <div class="col">
         <div data-mdb-input-init class="form-outline">
@@ -43,7 +45,6 @@
       </div>
     </div>
     <br>
-
     <div class="row g-5">
       <div class="col">
         <div data-mdb-input-init class="form-outline">
@@ -52,12 +53,21 @@
         </div>
       </div>
       <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="role">Role : </label>
-          <select id="role" name="role">
-            <option th:each="role : ${role}" th:value="${role.role}" th:text="${role.role}"></option>
+        <div class="form-group">
+          <label for="role" class="block mb-1">Role:</label>
+          <select id="role" name="role" class="form-select rounded">
+            <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
           </select>
         </div>
+        <!--
+        <div class="form-group">
+          <label for="myManager" class="block mb-1">Manager:</label>
+          <select id="myManager" name="myManager" class="form-select rounded">
+            <option th:each="manager : ${managers}" th:value="${manager.idPerson}" th:text="${manager.idPerson}"></option>
+          </select>
+        </div>
+          -->
+
       </div>
     </div>
     <br>
@@ -67,7 +77,7 @@
   <footer>
     <a href="employeList" />Liste employes
   </footer>
-
 </form>
+</div>
 </body>
 </html>

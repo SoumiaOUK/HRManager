@@ -19,4 +19,12 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
             value = "select * from person WHERE position=\"MANAGER\";",
             nativeQuery = true)
     List<Manager> listManagers();
+
+
+    @Query(
+            value = "select * from person WHERE id_manager=?1 AND position=\"EMPLOYE\"",
+            nativeQuery = true)
+    List<Employe> listEmpByManager(long id);
+
+
 }

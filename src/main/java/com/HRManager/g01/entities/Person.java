@@ -42,9 +42,15 @@ public class Person {
     @OneToOne(fetch = FetchType.EAGER,mappedBy = "personne")
     private User user;
 
+
+
     @ManyToOne
     @JoinColumn(name = "idManager",nullable = false)
     private Manager myManager;
+
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "RecipientID")
+    private List<Bonus> bonuses;
 
     /*
     @Override

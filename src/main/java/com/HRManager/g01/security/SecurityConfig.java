@@ -36,13 +36,12 @@ public class SecurityConfig{
                 .authorizeHttpRequests(
                         authCustomizer -> authCustomizer
                                 //.requestMatchers("listLeaves").hasRole("MANAGER")
-                                .requestMatchers("/createEmploye").hasRole("EMPLOYE")
+                                //.requestMatchers("/listLeave").hasRole("EMPLOYE")
                                 .anyRequest().permitAll()
                 )
                 .exceptionHandling(e ->e.accessDeniedPage("/accessDenied"))
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
-
     }
     /*
         @Bean

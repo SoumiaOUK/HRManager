@@ -1,7 +1,5 @@
 package com.HRManager.g01.security.services;
-
-
-import com.HRManager.g01.entities.Person;
+import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.entities.User;
 import com.HRManager.g01.security.repositories.RoleRepository;
@@ -9,13 +7,9 @@ import com.HRManager.g01.security.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -104,14 +98,12 @@ public class AccountServiceImp implements AccountService {
 
 @Autowired EmailServiceImp sendEmail;
     @Override
-    public User createUser(Person person) {
+    public User createUserEmp(Employe person) {
         String username=usernameGenerator(person.getFirstName(),person.getLastName());
         //verify that the username doesn't exist because it's unique
         if(userRepository.findByUsername(username)!=null) throw new RuntimeException("Error : username already exists!");
-
         String password= generateRandomPassword();
         System.out.println("ACCOUNTSERVICEIMP =   password \n "+password+"\n ");
-
         User user = User.builder()
                 .userId(UUID.randomUUID().toString())
                 .username(username)
@@ -126,9 +118,6 @@ public class AccountServiceImp implements AccountService {
         }
         return userRepository.save(user);
     }
-
-
-
     @Override
     public User loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);

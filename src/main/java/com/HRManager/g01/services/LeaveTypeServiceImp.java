@@ -14,4 +14,15 @@ public class LeaveTypeServiceImp implements LeaveTypeService{
     public List<LeaveType> getLeaveTypes() {
         return L_TypeService.findAll();
     }
+
+    public LeaveType saveLeaveType(LeaveType leaveType) {
+        return L_TypeService.save(leaveType);
+    }
+
+    public LeaveType findLeaveTypeById(long id){
+        return L_TypeService.findById(id).get();
+    }
+    public void deleteLeaveType(Long id){
+        L_TypeService.deleteById(id);
+    }
 }

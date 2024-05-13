@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>All Tasks</title>
+    <style>
+        .priority-low {
+            background-color: #b5f8b5 !important; /* or any other shade of green */
+        }
+
+        .priority-medium {
+            background-color: #d1b1f8 !important; /* or any other shade of orange */
+        }
+
+        .priority-hight {
+            background-color: #f8a98d !important; /* or any other shade of red */
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+<header>
+    <h1>Tasks List</h1>
+    <br>
+</header>
+<main>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Task Name</th>
+            <th>Priority</th>
+            <th>Executors</th>
+            <th>Task Deadline</th>
+            <th>Status</th>
+            <th>Appreciation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task:${tasks}">
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.priority.toString().toLowerCase()}" th:class="${'priority-' + task.priority.toString().toLowerCase()}"></td>
+            <td>
+               <span th:each="executor, iterStat : ${task.taskCompleters}">
+                <span th:text="${executor.firstName + ' ' + executor.lastName}"></span>
+                <span th:if="${!iterStat.last}"><br></span>
+                </span>
+            </td>
+            <td th:text="${task.dueDate}"></td>
+            <td th:text="${task.status}"></td>
+            <td th:text="${task.Appreciation}"></td>
+        <!--
+            <td><a th:href="@{deleteEmploye(id=${employe.idPerson})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
+            <td><a th:href="@{showEmploye(id=${employe.idPerson})}">modifier</a></td>
+        -->
+        </tr>
+        </tbody>
+    </table>
+
+
+</main>
+</div>
+</body>
+</html>

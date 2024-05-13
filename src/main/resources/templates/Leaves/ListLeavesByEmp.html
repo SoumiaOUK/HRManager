@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List My Leave</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-top: 50px;
+    }
+
+    .table {
+      border-radius: 8px;
+    }
+
+    th {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+<div class="container">
+  <h1 class="my-4">List of My Leaves</h1>
+  <div th:fragment="LeaveByExecutorSection">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Duration</th>
+      <th>Reason</th>
+      <th>Type</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="leave : ${leaves}" class="table-row">
+      <td th:text="${#dates.format(leave.startDate, 'yyyy-MM-dd')}"></td>
+      <td th:text="${#dates.format(leave.endDate, 'yyyy-MM-dd')}"></td>
+      <td th:text="${leave.duration}"></td>
+      <td th:text="${leave.reason}"></td>
+      <td th:text="${leave.leaveType.getLabelle()}"></td>
+      <td th:text="${leave.status}"></td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+<!-- Bootstrap Bundle with Popper -->
+<script src="webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS for animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tableRows = document.querySelectorAll('.table-row');
+    tableRows.forEach((row, index) => {
+      setTimeout(() => {
+        row.classList.add('fadeIn');
+      }, index * 100);
+    });
+  });
+</script>
+
+<!-- Custom CSS for animations -->
+<style>
+  .table-row {
+    opacity: 0;
+  }
+
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</body>
+</html>

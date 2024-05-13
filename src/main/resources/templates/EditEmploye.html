@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
 <head>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
 
@@ -8,14 +11,16 @@
     <title>Th - Employe Edit</title>
 </head>
 <body>
+<div layout:fragment="content">
+
 <header>
     <h1>Modifer Employe</h1>
 </header>
 <main>
     <form th:action="@{updateEmploye}" method="post">
         <div>
-            <label for="id"> id: </label>
-            <input type="text" name="idPerson" for="id" id="id" th:value="${empTh.idPerson}">
+            <label hidden="hidden" for="id"> id: </label>
+            <input hidden="hidden" type="text" name="idPerson" for="id" id="id" th:value="${empTh.idPerson}">
         </div>
         <div>
             <div class="row g-5">
@@ -80,5 +85,6 @@
 <footer>
     <a href="employeList">list employe</a>
 </footer>
+</div>
 </body>
 </html>

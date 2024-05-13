@@ -7,5 +7,6 @@ import java.util.List;
 
 @Service
 public interface LeaveTypeService {
-    public List<LeaveType> getLeaveTypes();
+    List<LeaveType> getLeaveTypes();
+    void deleteLeaveType(Long id);
 }

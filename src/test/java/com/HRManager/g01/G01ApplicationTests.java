@@ -176,7 +176,7 @@ class G01ApplicationTests {
 
 	@Test
 	public void TestgetAllEmployees(){
-		List<Employe> employees= empService.getAllEmployees();
+		List<Employe> employees= empService.getEmployeesByManager();
 		employees.forEach(System.out::println);
 	}
 	@Test

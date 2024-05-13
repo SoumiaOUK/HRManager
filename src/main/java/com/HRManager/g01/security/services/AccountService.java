@@ -1,5 +1,6 @@
 package com.HRManager.g01.security.services;
 
+import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.entities.User;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public interface AccountService {
     //User createUser(String username, String password, String confirmPassword);
-    User createUser(Person person);
+    User createUserEmp(Employe person);
     Role createRole(String role);
     void addRoleToUser(String username, Role role);
 

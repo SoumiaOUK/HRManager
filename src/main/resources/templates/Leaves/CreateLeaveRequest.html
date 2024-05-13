@@ -1,61 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Leave Request</title>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css"> <!-- Ajouter votre fichier CSS personnalisé ici -->
-  <title>Create Leave Request</title>
+  <style>
+    /* Additional custom styles */
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    }
+
+    .form-container h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
+<div layout:fragment="content">
+
+
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Create Leave Request</h2>
-  <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-    <!-- Affichage du message d'erreur -->
-    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Error!</strong> <span th:text="${errorMessage}"></span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <!-- Champs de formulaire -->
-    <div class="mb-3">
-      <label for="startDate" class="form-label">Start Date:</label>
-      <input type="date" id="startDate" name="startDate" class="form-control" required/>
-      <div class="invalid-feedback">Please provide a valid start date.</div>
-    </div>
+  <div class="form-container">
+    <h2>Create Leave Request</h2>
+    <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+      <!-- Affichage du message d'erreur -->
+      <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> <span th:text="${errorMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <!-- Champs de formulaire -->
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" class="form-control" required/>
+        <div class="invalid-feedback">Please provide a valid start date.</div>
+      </div>
 
-    <div class="mb-3">
-      <label for="endDate" class="form-label">End Date:</label>
-      <input type="date" id="endDate" name="endDate" class="form-control" required/>
-      <div class="invalid-feedback">Please provide a valid end date.</div>
-    </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">End Date:</label>
+        <input type="date" id="endDate" name="endDate" class="form-control" required/>
+        <div class="invalid-feedback">Please provide a valid end date.</div>
+      </div>
 
-    <div class="mb-3">
-      <label for="reason" class="form-label">Reason:</label>
-      <input type="text" id="reason" name="reason" class="form-control" required/>
-      <div class="invalid-feedback">Please provide a reason for leave.</div>
-    </div>
+      <div class="mb-3">
+        <label for="reason" class="form-label">Reason:</label>
+        <input type="text" id="reason" name="reason" class="form-control" required/>
+        <div class="invalid-feedback">Please provide a reason for leave.</div>
+      </div>
 
-    <div class="mb-3">
-      <label for="commentaire" class="form-label">Commentaire:</label>
-      <input type="text" id="commentaire" name="commentaire" class="form-control"/>
-    </div>
+      <div class="mb-3">
+        <label for="commentaire" class="form-label">Commentaire:</label>
+        <input type="text" id="commentaire" name="commentaire" class="form-control"/>
+      </div>
 
-    <div class="mb-3">
-      <label for="leaveType" class="form-label">Leave Types:</label>
-      <select id="leaveType" name="leaveType" class="form-select" required>
-        <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType.idType}" th:text="${leaveType.labelle}"></option>
-      </select>
-      <div class="invalid-feedback">Please select a leave type.</div>
-    </div>
-    <div class="mb-3">
-      <label for="leaveType" class="form-label">Leave Proof</label>
-
-      <input type="file" name="file" />
-
-      <div class="invalid-feedback">Please select a leave type.</div>
-    </div>
-    <!-- Bouton Soumettre -->
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      <div class="mb-3">
+        <label for="leaveType" class="form-label">Leave Types:</label>
+        <select id="leaveType" name="leaveType" class="form-select" required>
+          <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType.idType}" th:text="${leaveType.labelle}"></option>
+        </select>
+        <div class="invalid-feedback">Please select a leave type.</div>
+      </div>
+      <div class="mb-3">
+        <label for="leaveProof" class="form-label">Leave Proof</label>
+        <input type="file" id="leaveProof" name="leaveProof" class="form-control" accept="image/*, application/pdf" required/>
+        <div class="invalid-feedback">Please upload a valid leave proof (Image or PDF).</div>
+      </div>
+      <!-- Bouton Soumettre -->
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+    </form>
+  </div>
+</div>
 </div>
 <!-- Scripts Bootstrap -->
 <script src="webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add LeaveType</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-container {
+            background-color: #6A1B9A;
+            padding: 30px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background-color: #fff;
+            color: #6A1B9A;
+            border-color: #6A1B9A;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #6A1B9A;
+        }
+
+        .btn-purple {
+            background-color: #6A1B9A;
+            border-color: #6A1B9A;
+            color: #fff;
+        }
+
+        .btn-purple:hover {
+            background-color: #4a148c;
+            border-color: #4a148c;
+        }
+    </style>
+</head>
+<body>
+<div  layout:fragment="content">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-container">
+                <h2 class="text-center mb-4">Formulaire</h2>
+                <form th:action="@{/saveLeaveType}" method="post">
+                    <div class="form-group">
+                        <label for="labelle">Labelle</label>
+                        <input type="text" class="form-control" id="labelle" name="labelle">
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Durée</label>
+                        <input type="number" class="form-control" id="duration" name="duration" >
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-purple btn-block">Soumettre</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

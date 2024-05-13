@@ -1,11 +1,13 @@
 package com.HRManager.g01.controllers;
 
+import com.HRManager.g01.entities.Employe;
 import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.services.RoleServiceImp;
 import com.HRManager.g01.services.ManagerServiceImp;
 import com.HRManager.g01.services.PersonService;
+import com.HRManager.g01.services.PersonServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ import java.util.List;
 //intermediare avec service
 public class PersonController {
     @Autowired
-    PersonService personService;
+    PersonServiceImp personService;
     @Autowired
     ManagerServiceImp managerServiceImp;
     @Autowired
@@ -42,7 +44,6 @@ public class PersonController {
     @RequestMapping("/savePerson")
     public String savePerson(@Valid Person Person,BindingResult bR,ModelMap modelMap){
         if (bR.hasErrors()) {
-
             // If there are validation errors, add an error message to the model
             modelMap.addAttribute("errorMessage", "Please fix the validation errors and submit again.");
             return "CreatePerson"; // Return to the form with the error message
@@ -59,18 +60,21 @@ public class PersonController {
 
     @RequestMapping("/PersonList")
     public String PersonList(ModelMap modelMap){
-        System.out.println("welcome to personlist");
-        List<Person> listEmp = personService.getAllPersones();
+        List<Employe> listEmp = personService.getlistEmpByManager();
+        listEmp.forEach(System.out::println);
         //on envoie la list du controlleur vers jsp using model map
+        System.out.println("welcome to personlist");
         modelMap.addAttribute("personTh",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views
-        return "PersonList";
+        return "Person/PersonList";
     }
 
     @RequestMapping("/deletePerson")
     public String deletePerson(@RequestParam("id") Long id,ModelMap modelMap){
         personService.deletePersonById(id);
         List<Person> listEmp = personService.getAllPersones();
+        System.out.println("////liste de mes employees");
+        listEmp.forEach(System.out::println);
         //on envoie la list du controlleur vers jsp using model map
         modelMap.addAttribute("personTh",listEmp);
         //retourn nom d'une view qu'on va chercher dans Views

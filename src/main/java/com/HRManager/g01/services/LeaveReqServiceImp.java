@@ -89,12 +89,21 @@ public class LeaveReqServiceImp implements LeaveReqService{
 
     //to search
     @Override
-    public List<LeaveRequest> getLeavesByEmp() {
+    public List<LeaveRequest> getMyLeaves() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         Person p = userRepository.findByUsername(currentPrincipalName).getPersonne();
         System.out.println("\n LEAVEREQSERVICEIMP    connected personne id"+p.getIdPerson());
-        return leaveReqRep.listLeavesByEmp(p.getIdPerson());}
+        return leaveReqRep.listLeavesByEmp(p.getIdPerson());
+    }
+
+    @Override
+    public List<LeaveRequest> getLeavesByEmp(Long id) {
+
+        return leaveReqRep.listLeavesByEmp(id);
+    }
+
+
     @Override
     public List<LeaveRequest> getLeavesByMan() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,43 +1,70 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
 <head>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Th - Person List</title>
+  <title>Person List</title>
 </head>
 <body>
-<header>
-  <h1>Person List</h1>
-  <br>
-</header>
+<div style="margin-top: 150px; margin-left: 100px" layout:fragment="content">
+
 <main>
-  <table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-    <tr>
-      <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+  <div style="row-span: inherit">
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="Person:${empTh}">
-      <td th:text="${Person.id}"></td>
-      <td th:text="${Person.firstName}"></td>
-      <td th:text="${Person.lastName}"></td>
-      <td th:text="${Person.email}"></td>
-      <td th:text="${Person.role}"></td>
-      <td th:text="${Person.departement}"></td>
-      <td th:text="${Person.soldeConges}"></td>
-      <td><a th:href="@{deletePerson(id=${Person.id})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet Person')">Delete</a></td>
-      <td><a th:href="@{showPerson(id=${Person.id})}">modifier</a></td>
-    </tr>
-    </tbody>
-  </table>
+  <h2>List Employees</h2>
 
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <a href="createEmploye" class="btn btn-success" style="background-color: #c64cf8">Ajouter Person</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table align-middle mb-0">
+          <thead class="bg-dark text-white">
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Service</th>
+            <th>Solde conge</th>
+            <th colspan="2">Actions</th> <!-- Merge delete and modify columns -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="Person:${empTh}">
+            <td th:text="${Person.id}"></td>
+            <td th:text="${Person.firstName}"></td>
+            <td th:text="${Person.lastName}"></td>
+            <td th:text="${Person.email}"></td>
+            <td th:text="${Person.role}"></td>
+            <td th:text="${Person.departement}"></td>
+            <td th:text="${Person.soldeConges}"></td>
+            <td>
+              <a href="#" class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cet Person')">Delete</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-primary">Modifier</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>
-<br>
-<footer>
-  <a href="createPerson">ajouter Person</a>
-</footer>
+</div>
 </body>
 </html>

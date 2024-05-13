@@ -1,15 +1,14 @@
 package com.HRManager.g01.controllers;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 @Controller
 public class AuthenticationController {
     @RequestMapping("/login")
     public String login(){
         return "Authentication/loginPage";
     }
-
+    @RequestMapping("/")
+    public String firstPage(){return "redirect:/myProfile";}
 
     @RequestMapping("/accessDenied")
     public String accessDenied(){

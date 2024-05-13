@@ -72,12 +72,7 @@ public class LeaveRequestController {
         return "Leaves/CreateLeaveRequest";
     }
 
-    @RequestMapping("/listLeaves")
-    public String listMyLeaves(ModelMap model){
-        List<LeaveRequest> listLeaves = leaveReqService.getLeavesByEmp();
-        model.addAttribute("leaves",listLeaves);
-        return "Leaves/ListLeaves";
-    }
+
 
     @RequestMapping("/listManagedLeaves")
     public String listManagedLeaves(ModelMap model){
@@ -112,7 +107,19 @@ public class LeaveRequestController {
         return null;
     }
 
+    @RequestMapping("/listLeavesByEmp")
+    public String listLeavesByEmp(@RequestParam("id")Long id ,ModelMap modelMap){
+        List<LeaveRequest> leaves = leaveReqService.getLeavesByEmp(id);
+        modelMap.addAttribute("leaves",leaves);
+        return null;
+    }
 
+    @RequestMapping("/listMyLeaves")
+    public String listLeavesByEmp(ModelMap modelMap){
+        List<LeaveRequest> leaves = leaveReqService.getMyLeaves();
+        modelMap.addAttribute("leaves",leaves);
+        return "Leaves/ListLeaves";
+    }
 
     @GetMapping("/downloadProof")
     public ResponseEntity<Resource> downloadProof(long id) {

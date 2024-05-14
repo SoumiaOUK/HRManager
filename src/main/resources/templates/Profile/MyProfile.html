@@ -11,11 +11,37 @@
     function toggleTasks() {
       var tasksSection = document.getElementById("tasksSection");
       tasksSection.classList.toggle("hidden");
+      document.getElementById("btn-tasks").classList.toggle("active");
+
+    }
+    function toggleBonus() {
+      var bonusSection = document.getElementById("bonusSection");
+      bonusSection.classList.toggle("hidden");
+      document.getElementById("btn-bonus").classList.toggle("active");
+
+    }
+    function toggleProfile() {
+      var profileSection = document.getElementById("profileSection");
+      profileSection.classList.toggle("hidden");
+      document.getElementById("btn-profil").classList.toggle("active");
+
+    }
+    function toggleLeaves() {
+      var leaveSection = document.getElementById("leaveSection");
+      leaveSection.classList.toggle("hidden");
+      document.getElementById("btn-leaves").classList.toggle("active");
+
     }
   </script>
   <style>
     .hidden {
       display: none;
+    }
+    .active {
+      background-color: purple;
+    }
+    .active i {
+      color: purple;
     }
   </style>
   <style>
@@ -56,14 +82,30 @@
     .profile-value {
       margin-left: 10px;
     }
+    .bouton {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 <div layout:fragment="content">
   <div>
-    <h1>Employe's informations</h1>
+    <button class="bouton" id="btn-profil"  onclick="toggleProfile()">Profil</button>
+    <button class="bouton" id="btn-tasks"  onclick="toggleTasks()">Tasks</button>
+    <button class="bouton" id="btn-bonus"  onclick="toggleBonus()">Bonus</button>
+    <button class="bouton" id="btn-leaves"  onclick="toggleLeaves()">Leaves</button>
+  </div>
+  <div>
+      <div id="profileSection" >
     <div class="profile-container">
-      <img class="profile-image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fvecteurs-premium%2Favatar-employe-bureau-dans-style-dessin-anime-dessin-anime-avatar-femme-bureau_137398715.htm&psig=AOvVaw1eFUctW63OTvJH3KziaWSE&ust=1715593908070000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJC50r3rh4YDFQAAAAAdAAAAABAJ" alt="Profile Image">
+        <h1>Employe's informations</h1>
+
+        <img class="profile-image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fvecteurs-premium%2Favatar-employe-bureau-dans-style-dessin-anime-dessin-anime-avatar-femme-bureau_137398715.htm&psig=AOvVaw1eFUctW63OTvJH3KziaWSE&ust=1715593908070000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJC50r3rh4YDFQAAAAAdAAAAABAJ" alt="Profile Image">
       <div class="profile-field">
         <span class="profile-label">Department:</span>
         <span class="profile-value">[[${profile.departement}]]</span>
@@ -93,27 +135,35 @@
         <span class="profile-value">[[${profile.myManager.getLastName}]]</span>
         <span class="profile-value">[[${profile.myManager.getFirstName}]]</span>
       </div>
+      </div>
     </div>
   </div>
   <div>
-    <h1 onclick="toggleTasks()">Employee's tasks &#9660;</h1>
     <div id="tasksSection" class="hidden">
+      <h1>Employee's tasks </h1>
+
       <!-- Include the fragment -->
     <div th:replace="Tasks/TasksByExecutor :: tasksByExecutorSection"></div>
     </div>
   </div>
   <div>
-    <h1>
-      Employe's Bonuses
-    </h1>
-    <div th:replace="Bonus/ListBonusByEmp :: BonusByExecutorSection"></div>
+
+    <div id="bonusSection" class="hidden">
+      <h1>
+        Employe's Bonuses
+      </h1>
+    <div th:replace="Bonus/ListBonusByEmp :: BonusByExecutorSection" ></div>
+    </div>
 
   </div>
   <div>
-    <h1>
-      Employe's Leaves
-    </h1>
+
+    <div id="leaveSection" class="hidden">
+      <h1>
+        Employe's Leaves
+      </h1>
     <div th:replace="Leaves/ListLeavesByEmp :: LeaveByExecutorSection"></div>
+    </div>
 
 
   </div>

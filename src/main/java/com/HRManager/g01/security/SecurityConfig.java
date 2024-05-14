@@ -35,7 +35,15 @@ public class SecurityConfig{
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authCustomizer -> authCustomizer
-                                //.requestMatchers("listLeaves").hasRole("MANAGER")
+                                .requestMatchers(
+                                        "listManagedBonus","listBonusByEmp","createBonus","saveBonus",
+                                        "createEmploye","saveEmploye","employeList","deleteEmploye","showEmploye", "updateEmploye",
+                                        "listManagedLeaves","acceptLeave","rejectLeave","listLeavesByEmp",
+                                        "createLeaveType","saveLeaveType","showLeaveType","updateLeaveType","deleteLeaveType",
+                                        "showProfile",
+                                        "listManagedTasks","listEmployeTasks","createTask","saveTask",
+                                        "createPerson","savePerson","PersonList","deletePerson","showPerson"
+                                        ).hasRole("MANAGER")
                                 //.requestMatchers("/listLeave").hasRole("EMPLOYE")
                                 .anyRequest().permitAll()
                 )

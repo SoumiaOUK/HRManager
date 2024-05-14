@@ -10,6 +10,7 @@ public interface BonusService {
     List<Bonus> getAllBonusesByMan();
     List<Bonus> getMyBonuses();
     List<Bonus> getBonusByEmp(Long id);
+    Bonus save(Bonus bonus);
     void cancelBonus(Long id);
 
 }

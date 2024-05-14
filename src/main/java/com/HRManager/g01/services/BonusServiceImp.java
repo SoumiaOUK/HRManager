@@ -1,5 +1,6 @@
 package com.HRManager.g01.services;
 import com.HRManager.g01.entities.Bonus;
+import com.HRManager.g01.entities.Manager;
 import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.repositories.BonusRepository;
 import com.HRManager.g01.security.repositories.UserRepository;
@@ -41,6 +42,15 @@ public class BonusServiceImp implements BonusService{
     @Override
     public List<Bonus> getBonusByEmp(Long id) {
         return bonusRepository.getMyBonus(id);
+    }
+
+    @Override
+    public Bonus save(Bonus bonus) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        Person p = userRepository.findByUsername(currentPrincipalName).getPersonne();
+        bonus.setManager((Manager) p);
+        return bonusRepository.save(bonus);
     }
 
     @Override

@@ -9,20 +9,18 @@
     <title>Th - Employe List</title>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" style="margin-top: 150px; margin-left:150px">
 
 <header>
     <h1>Employe List</h1>
     <br>
 </header>
 <main>
-    <a th:text="${#authentication.name}">
-        {username}
-    </a>
-    <table class="table table-striped table-hover">
-        <thead class="bg-light">
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
         <tr>
-            <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th>
+            <th>Id</th> <th>Nom</th> <th>Prenom</th> <th>email</th> <th>Role</th> <th>Service</th> <th>Solde conge</th><th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -35,8 +33,8 @@
             <td th:text="${employe.departement}"></td>
             <td th:text="${employe.soldeConges}"></td>
 
-            <td><a th:href="@{deleteEmploye(id=${employe.idPerson})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')">Delete</a></td>
-            <td><a th:href="@{showEmploye(id=${employe.idPerson})}">modifier</a></td>
+            <td><a th:href="@{deleteEmploye(id=${employe.idPerson})}" onclick="return confirm('Etes vous sur de vouloir supprimer cet employe')"><i class="bi bi-trash3-fill" style="color: #8821ef"></i></a>
+            <a th:href="@{showEmploye(id=${employe.idPerson})}"><i class="bi bi-pen" style="color: #8821ef"></i></a></td>
         </tr>
         </tbody>
     </table>
@@ -48,9 +46,7 @@
     <a th:if="${#authorization.expression('hasRole(''MANAGER'')')}" href="createEmploye">ajouter employe</a>
     <a th:if="${authorization.expression('hasAnyRole(''MANAGER'')')}" href="createEmploye">ajouter employe</a>
     -->
-    <div sec:authorize="hasRole('MANAGER')">
-        <a href="createEmploye">ajouter employe</a>
-    </div>
+
 
 
 </footer>

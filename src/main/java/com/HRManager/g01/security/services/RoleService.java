@@ -8,5 +8,6 @@ import java.util.List;
 @Service
 public interface RoleService {
     public List<Role> getRoles();
+    Role saveRole(Role r);
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public interface AccountService {
     //User createUser(String username, String password, String confirmPassword);
-    User createUserEmp(Employe person);
+    User createUserEmp(Person person);
     Role createRole(String role);
     void addRoleToUser(String username, Role role);
 

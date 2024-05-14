@@ -1,5 +1,6 @@
 package com.HRManager.g01.security.services;
 import com.HRManager.g01.entities.Employe;
+import com.HRManager.g01.entities.Person;
 import com.HRManager.g01.security.entities.Role;
 import com.HRManager.g01.security.entities.User;
 import com.HRManager.g01.security.repositories.RoleRepository;
@@ -72,8 +73,6 @@ public class AccountServiceImp implements AccountService {
 
             // Optionally, you can lowercase the username
             return username.toUpperCase();
-
-
     }
     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
@@ -98,7 +97,7 @@ public class AccountServiceImp implements AccountService {
 
 @Autowired EmailServiceImp sendEmail;
     @Override
-    public User createUserEmp(Employe person) {
+    public User createUserEmp(Person person) {
         String username=usernameGenerator(person.getFirstName(),person.getLastName());
         //verify that the username doesn't exist because it's unique
         if(userRepository.findByUsername(username)!=null) throw new RuntimeException("Error : username already exists!");

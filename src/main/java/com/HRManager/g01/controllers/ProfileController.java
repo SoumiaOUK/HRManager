@@ -40,6 +40,25 @@ public class ProfileController {
        System.out.println("LeaveReqServiceImpl currentPrincipalName"+currentPrincipalName);
        Person p = userRepository.findByUsername(currentPrincipalName).getPersonne();
        modelMap.addAttribute("profile",p);
+
+       //fetch tasks :
+       List<Tasks> tasks = taskServiceImp.getMyTasks();
+       System.out.println("\n Profile Controller =     tasks");
+       tasks.forEach(System.out::println);
+       modelMap.addAttribute("tasks",tasks);
+       //fetch leaves:
+       System.out.println("\n Profile Controller =     leaves");
+       List<LeaveRequest> leaves = leaveReqService.getMyLeaves();
+       leaves.forEach(System.out::println);
+       modelMap.addAttribute("leaves",leaves);
+
+       //fetch bonuses:
+       System.out.println("\n Profile Controller =     bonuses");
+       List<Bonus> bonuses = bonusServiceImp.getMyBonuses();
+       bonuses.forEach(System.out::println);
+       modelMap.addAttribute("bonuses",bonuses);
+
+
        return "Profile/MyProfile";
    }
     @RequestMapping("/showProfile")
@@ -49,13 +68,19 @@ public class ProfileController {
 
         //fetch tasks :
         List<Tasks> tasks = taskServiceImp.getTasksByExecutor(id);
+        System.out.println("\n Profile Controller =     tasks");
+        tasks.forEach(System.out::println);
         modelMap.addAttribute("tasks",tasks);
         //fetch leaves:
+        System.out.println("\n Profile Controller =     leaves");
         List<LeaveRequest> leaves = leaveReqService.getLeavesByEmp(id);
+        leaves.forEach(System.out::println);
         modelMap.addAttribute("leaves",leaves);
 
         //fetch bonuses:
+        System.out.println("\n Profile Controller =     bonuses");
         List<Bonus> bonuses = bonusServiceImp.getMyBonuses();
+        bonuses.forEach(System.out::println);
         modelMap.addAttribute("bonuses",bonuses);
 
 

@@ -9,11 +9,43 @@
     <title>Create Leave Request</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css"> <!-- Ajouter votre fichier CSS personnalisé ici -->
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .form-label {
+            color: #8821ef;
+        }
+
+        .form-control {
+            background-color: #333;
+            color: #fff;
+            border-color: #8821ef;
+        }
+
+        .form-select {
+            background-color: #333;
+            color: #fff;
+            border-color: #8821ef;
+        }
+
+        .btn {
+            background-color: #8821ef;
+            border-color: #8821ef;
+        }
+
+        .btn:hover {
+            background-color: #4d136e;
+            border-color: #4d136e;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content" style="margin-top: 150px; margin-left:150px">
-
-
 <form th:action="@{saveTask}" method="post">
     <!-- Affichage du message d'erreur -->
     <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">

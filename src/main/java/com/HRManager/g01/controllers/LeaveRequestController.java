@@ -59,10 +59,6 @@ public class LeaveRequestController {
             modelMap.addAttribute("errorMessage","Please check the errors below and try again");
             return "Leaves/CreateLeaveRequest.html";
         }
-        //manager , employe , status
-        //leaveRequest.setManager(managerService.getManagerById(1));
-        //leaveRequest.setPerson(empService.getEmploye(2));
-        //save
         LeaveRequest memo = leaveReqService.saveLeave(leaveRequest);
         if(memo!=null){
             leaveProofServiceImp.saveLeaveProof(file,memo.getIdLeave());

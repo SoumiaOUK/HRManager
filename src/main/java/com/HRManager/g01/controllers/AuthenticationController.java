@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthenticationController {
     @RequestMapping("/login")
     public String login(){
-        return "Authentication/loginPage";
+        return "Authentication/LoginPage";
     }
     @RequestMapping("/")
     public String firstPage(){return "redirect:/myProfile";}

@@ -31,7 +31,7 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
-                .formLogin(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authCustomizer -> authCustomizer
@@ -44,37 +44,19 @@ public class SecurityConfig{
                                         "listManagedTasks","listEmployeTasks","createTask","saveTask",
                                         "createPerson","savePerson","PersonList","deletePerson","showPerson"
                                         ).hasRole("MANAGER")
-                                //.requestMatchers("/listLeave").hasRole("EMPLOYE")
-                                .anyRequest().permitAll()
+                                .requestMatchers("/login","/webjars/**").permitAll()
+                                .anyRequest().authenticated()
+                )
+                .formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/")
                 )
                 .exceptionHandling(e ->e.accessDeniedPage("/accessDenied"))
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
-    /*
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-            httpSecurity.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/employeList").hasRole("EMPLOYE")
-                    .requestMatchers("/createEmploye").hasRole("MANAGER")
-                    .requestMatchers("/welcome").authenticated()
-                    .requestMatchers("/accessDenied").permitAll()
-                    .anyRequest().authenticated());
-            httpSecurity.formLogin(formLogin ->formLogin.loginPage("/login").successForwardUrl("/welcome").permitAll());
-            httpSecurity.exceptionHandling(access-> access.accessDeniedPage("/accessDenied"));
-            return httpSecurity.build();
-        }
-    /*
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
-        httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
-        httpSecurity.authorizeHttpRequests().requestMatchers("/userRegister").permitAll();
-        httpSecurity.authorizeHttpRequests().requestMatchers("/").hasRole("ADMIN");
-        httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
-        httpSecurity.exceptionHandling().accessDeniedPage("/accessDenied");
-        return httpSecurity.build();
-    }
-     */
+
     @Autowired
     AccountServiceImp accountServiceImp;
     @Bean
@@ -93,20 +75,5 @@ public class SecurityConfig{
                     .build();
         };
     }
-    /*
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
-        return (AuthenticationProvider) provider;
-
-    }
-
-    private PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-     */
 }
 

@@ -26,6 +26,7 @@ public class TasksController {
     public String listTasks(ModelMap modelMap){
         List<Tasks> tasks = taskServiceImp.getTasksByManager();
         modelMap.addAttribute("tasks",tasks);
+        tasks.forEach(System.out::println);
         return "Tasks/AllManagedTasks";
     }
 

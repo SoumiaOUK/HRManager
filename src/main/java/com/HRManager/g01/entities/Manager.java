@@ -32,6 +32,9 @@ public class Manager extends Person{
     public Manager(int soldeConges, String firstName, String lastName, String email, String departement, String role, Manager myManager) {
         super(soldeConges, firstName, lastName, email, departement, role, myManager);
     }
+    public Manager(int soldeConges, String firstName, String lastName, String email, String departement, String role) {
+        super(soldeConges, firstName, lastName, email, departement, role);
+    }
 
     @Override
     public List<LeaveRequest> getLeaves() {

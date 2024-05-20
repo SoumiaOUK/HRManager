@@ -49,4 +49,5 @@ public class Tasks {
 
    @OneToMany(fetch = FetchType.EAGER,mappedBy = "task")
    private List<Bonus> bonuses;
+
 }

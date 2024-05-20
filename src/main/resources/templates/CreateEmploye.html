@@ -1,83 +1,105 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="Template.html"
->
-  <title>Th-Add Employe</title>
+      layout:decorate="Template.html">
 <head>
+  <meta charset="UTF-8">
+  <title>Th-Add Employe</title>
   <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 150px;
+      margin-left: 150px;
+    }
+    h1 {
+      color: #6a0dad; /* Mauve color */
+    }
+    label {
+      color: #6a0dad; /* Mauve color */
+    }
+    .form-outline input {
+      border-color: #6a0dad;
+    }
+    .form-select {
+      border-color: #6a0dad;
+    }
+    .btn-mauve {
+      background-color: #6a0dad;
+      color: white;
+    }
+    .footer-link {
+      color: #6a0dad;
+      text-decoration: none;
+    }
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-<div layout:fragment="content">
-<h1>Add Employe</h1>
-<br>
-<form th:action="@{saveEmploye}" method="post">
-  <div>
-    <!-- Add this block to display the error message -->
-    <div class="row g-5">
+<div layout:fragment="content" class="container">
+  <h1>Add Employe</h1>
+  <br>
+  <form th:action="@{saveEmploye}" method="post">
+    <div class="row g-3">
       <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="name"> firstName:</label>
-          <input type="text" for="firstName" id="name" name="firstName">
+        <div class="form-outline">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" class="form-control">
         </div>
       </div>
       <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="lastName">lastName</label>
-          <input type="text" id="lastName" name="lastName">
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row g-5">
-      <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="email">Email : </label>
-          <input type="text" name="email" id="email">
-        </div>
-      </div>
-
-      <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="departement">departement : </label>
-          <input type="text" name="departement" id="departement">
+        <div class="form-outline">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" class="form-control">
         </div>
       </div>
     </div>
     <br>
-    <div class="row g-5">
+    <div class="row g-3">
       <div class="col">
-        <div data-mdb-input-init class="form-outline">
-          <label for="solde_conge">Solde Conge : </label>
-          <input type="text" name="soldeConges" id="solde_conge">
+        <div class="form-outline">
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" class="form-control">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <label for="departement">Departement:</label>
+          <input type="text" name="departement" id="departement" class="form-control">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-outline">
+          <label for="soldeConges">Solde Conge:</label>
+          <input type="text" name="soldeConges" id="soldeConges" class="form-control">
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-          <label for="role" class="block mb-1">Role:</label>
-          <select id="role" name="role" class="form-select rounded">
+          <label for="role">Role:</label>
+          <select id="role" name="role" class="form-select">
             <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
           </select>
         </div>
-        <!--
-        <div class="form-group">
-          <label for="myManager" class="block mb-1">Manager:</label>
-          <select id="myManager" name="myManager" class="form-select rounded">
-            <option th:each="manager : ${managers}" th:value="${manager.idPerson}" th:text="${manager.idPerson}"></option>
-          </select>
-        </div>
-          -->
-
       </div>
     </div>
     <br>
-    <input type="submit" value="Enregistrer">
-  </div>
+    <input type="submit" value="Enregistrer" class="btn btn-mauve">
+  </form>
   <br>
   <footer>
-    <a href="employeList" />Liste employes
+    <a href="employeList" class="footer-link">Liste employes</a>
   </footer>
-</form>
 </div>
+
+<script src="webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

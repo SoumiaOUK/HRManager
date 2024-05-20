@@ -25,6 +25,10 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles= new ArrayList<>();
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personne_id")
     private Person personne;

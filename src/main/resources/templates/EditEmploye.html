@@ -63,17 +63,13 @@
                         <input type="text" name="soldeConges" id="solde_conge" th:value="${empTh.soldeConges}" >
                     </div>
                 </div>
-
-                <div class="col">
-                    <div data-mdb-input-init class="form-outline">
-                        <label for="role">Role : </label>
-                        <select id="role" name="role" th:value="${empTh.role}">
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="role" class="block mb-1">Role:</label>
+                    <select id="role" name="role" class="form-select rounded">
+                        <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
+                    </select>
                 </div>
+
             </div>
 
             <input type="submit" value="Enregistrer">

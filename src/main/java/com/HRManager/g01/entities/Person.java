@@ -45,7 +45,7 @@ public class Person {
 
 
     @ManyToOne
-    @JoinColumn(name = "idManager",nullable = false)
+    @JoinColumn(name = "idManager",nullable = true)
     private Manager myManager;
 
 
@@ -107,6 +107,14 @@ public class Person {
         this.departement = departement;
         this.role = role;
         this.myManager = myManager;
+    }
+    public Person(int soldeConges, String firstName, String lastName, String email, String departement, String role) {
+        this.soldeConges = soldeConges;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departement = departement;
+        this.role = role;
     }
 
     public Person(Long idPerson, int soldeConges, String firstName, String lastName, String email, String departement, String role, List<LeaveRequest> leaves, List<Absence> absences, User user, Manager myManager) {

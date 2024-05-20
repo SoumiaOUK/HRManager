@@ -70,6 +70,8 @@ public class EmployeController {
         System.out.println("\n id :   "+id);
         Employe emp = empService.getEmploye(id);
         System.out.println("employe   :   "+emp.toString());
+        List<Role> roles = roleServiceImp.getRoles();
+        modelMap.addAttribute("roles",roles);
         modelMap.addAttribute("empTh",emp);
         return "EditEmploye";
     }

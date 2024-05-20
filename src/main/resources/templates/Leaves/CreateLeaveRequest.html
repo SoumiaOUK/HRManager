@@ -34,7 +34,7 @@
 <div class="container mt-5">
   <div class="form-container">
     <h2>Create Leave Request</h2>
-    <form th:action="@{saveLeaveReq}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form th:action="@{saveLeaveReq}" method="post" enctype="multipart/form-data">
       <!-- Affichage du message d'erreur -->
       <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> <span th:text="${errorMessage}"></span>
@@ -73,7 +73,7 @@
       </div>
       <div class="mb-3">
         <label for="leaveProof" class="form-label">Leave Proof</label>
-        <input type="file" id="leaveProof" name="leaveProof" class="form-control" accept="image/*, application/pdf" required/>
+        <input type="file" id="leaveProof" name="file" class="form-control" accept="image/*, application/pdf" required/>
         <div class="invalid-feedback">Please upload a valid leave proof (Image or PDF).</div>
       </div>
       <!-- Bouton Soumettre -->

@@ -14,7 +14,6 @@ public class LeaveTypeServiceImp implements LeaveTypeService{
     public List<LeaveType> getLeaveTypes() {
         return L_TypeService.findAll();
     }
-
     public LeaveType saveLeaveType(LeaveType leaveType) {
         return L_TypeService.save(leaveType);
     }

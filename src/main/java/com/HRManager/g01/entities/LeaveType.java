@@ -10,8 +10,14 @@ public class LeaveType {
     private String labelle;
     private int duration;
     private String description;
+
+
     @OneToMany(mappedBy = "leaveType")
     private List<LeaveRequest> requests;
+
+    public LeaveType() {
+
+    }
 
     @Override
     public String toString() {
@@ -61,5 +67,11 @@ public class LeaveType {
 
     public void setRequests(List<LeaveRequest> requests) {
         this.requests = requests;
+    }
+    //constructor
+    public LeaveType(String descripion ,String labelle , int duration ){
+        this.description = descripion;
+        this.labelle = labelle;
+        this.duration = duration;
     }
 }

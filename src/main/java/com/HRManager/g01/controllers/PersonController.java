@@ -34,8 +34,8 @@ public class PersonController {
     public String createPerson(ModelMap modelMap){
         List<Manager> managers = managerServiceImp.getAllManagers();
         List<Role> roles = roleServiceImp.getRoles();
-        modelMap.addAttribute("managers",managers);
         modelMap.addAttribute("roles",roles);
+        modelMap.addAttribute("managers",managers);
         roles.forEach(System.out::println);
         return "Person/CreatePerson";
     }
@@ -54,7 +54,7 @@ public class PersonController {
         System.out.println("\n \n \n  role"+Person.getRole());
         //faire passer info from DB to th
        Person memo = personService.savePerson(Person,role);
-        return "CreatePerson";
+        return "redirect : /employeList";
 
     }
 

@@ -208,8 +208,20 @@ class G01ApplicationTests {
 		leaveProofServiceImp.assignProofToLeave(l,l);
 	}
 
+	@Autowired
+	ManagerService managerService;
+	@Autowired
+	RoleService roleService;
+	@Test
+	public void TestCreateManager(){
+		Role  roleEmploye = new Role("EMPLOYE");
+		Role  roleManager = new Role("MANAGER");
+		roleService.saveRole(roleEmploye);
+		roleService.saveRole(roleManager);
+		Manager man = new Manager(12,"Ahmed","Rabii","ahmed@gmail.com","IT","MANAGER");
+		managerService.saveManager(man);
 
-
+	}
 
 
 }

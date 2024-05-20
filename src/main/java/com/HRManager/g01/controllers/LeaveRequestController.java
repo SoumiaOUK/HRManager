@@ -42,6 +42,7 @@ public class LeaveRequestController {
     EmployeServiceImp empService;
     @Autowired
     LeaveProofServiceImp leaveProofServiceImp;
+
     @RequestMapping("/createLeaveReq")
     public String createLeaveReq(Model model) {
         List<LeaveType> leaveTypes = leaveTypeService.getLeaveTypes();
@@ -52,6 +53,7 @@ public class LeaveRequestController {
         model.addAttribute("managers",managers);
         return "Leaves/CreateLeaveRequest";
     }
+
     @RequestMapping("/saveLeaveReq")
     public String saveLeaveReq(@RequestParam("file") MultipartFile file,@Valid LeaveRequest leaveRequest, BindingResult br, ModelMap modelMap){
         System.out.println("im here");
@@ -68,14 +70,13 @@ public class LeaveRequestController {
         return "Leaves/CreateLeaveRequest";
     }
 
-
-
     @RequestMapping("/listManagedLeaves")
     public String listManagedLeaves(ModelMap model){
         List<LeaveRequest> listLeaves = leaveReqService.getLeavesByMan();
         model.addAttribute("leaves",listLeaves);
         return "Leaves/ListManagedLeaves";
     }
+
     @RequestMapping("/acceptLeave")
     public String acceptLeave(long id, ModelMap model){
         leaveReqService.acceptLeaveRequest(id);

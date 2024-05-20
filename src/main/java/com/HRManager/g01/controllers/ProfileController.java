@@ -61,6 +61,36 @@ public class ProfileController {
 
        return "Profile/MyProfile";
    }
+
+
+    @RequestMapping("/managerProfile")
+    public String managerProfile(ModelMap modelMap){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.out.println("LeaveReqServiceImpl currentPrincipalName"+currentPrincipalName);
+        Person p = userRepository.findByUsername(currentPrincipalName).getPersonne();
+        modelMap.addAttribute("profile",p);
+
+        //fetch tasks :
+        List<Tasks> tasks = taskServiceImp.getMyTasks();
+        System.out.println("\n Profile Controller =     tasks");
+        tasks.forEach(System.out::println);
+        modelMap.addAttribute("tasks",tasks);
+        //fetch leaves:
+        System.out.println("\n Profile Controller =     leaves");
+        List<LeaveRequest> leaves = leaveReqService.getMyLeaves();
+        leaves.forEach(System.out::println);
+        modelMap.addAttribute("leaves",leaves);
+
+        //fetch bonuses:
+        System.out.println("\n Profile Controller =     bonuses");
+        List<Bonus> bonuses = bonusServiceImp.getMyBonuses();
+        bonuses.forEach(System.out::println);
+        modelMap.addAttribute("bonuses",bonuses);
+
+
+        return "Profile/ManagerProfile";
+    }
     @RequestMapping("/showProfile")
     public String showProfile(@RequestParam("id") Long id , ModelMap modelMap){
         Person profileDetails = personServiceImp.getPerson(id);

@@ -1,8 +1,5 @@
 package com.HRManager.g01.entities;
 import jakarta.persistence.*;
-
-import java.util.List;
-
 @Entity
 @DiscriminatorValue("EMPLOYE")
 public class Employe extends Person {

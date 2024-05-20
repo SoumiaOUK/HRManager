@@ -101,43 +101,37 @@
     <button class="bouton" id="btn-leaves"  onclick="toggleLeaves()">Leaves</button>
   </div>
   <div>
-      <div id="profileSection" >
-    <div class="profile-container">
+    <div id="profileSection" >
+      <div class="profile-container">
         <h1>Employe's informations</h1>
-<!--
-        <img class="profile-image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fvecteurs-premium%2Favatar-employe-bureau-dans-style-dessin-anime-dessin-anime-avatar-femme-bureau_137398715.htm&psig=AOvVaw1eFUctW63OTvJH3KziaWSE&ust=1715593908070000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJC50r3rh4YDFQAAAAAdAAAAABAJ" alt="Profile Image">
--->
-      <div class="profile-field">
-        <span class="profile-label">Department:</span>
-        <span class="profile-value">[[${profile.departement}]]</span>
-      </div>
-      <div class="profile-field">
-        <span class="profile-label">Email:</span>
-        <span class="profile-value">[[${profile.email}]]</span>
-      </div>
-      <div class="profile-field">
-        <span class="profile-label">First Name:</span>
-        <span class="profile-value">[[${profile.firstName}]]</span>
-      </div>
-      <div class="profile-field">
-        <span class="profile-label">Last Name:</span>
-        <span class="profile-value">[[${profile.lastName}]]</span>
-      </div>
-      <div class="profile-field">
-        <span class="profile-label">Role:</span>
-        <span class="profile-value">[[${profile.role}]]</span>
-      </div>
-      <div class="profile-field">
-        <span class="profile-label">Solde Conges:</span>
-        <span class="profile-value">[[${profile.soldeConges}]]</span>
-      </div>
-      <div th:if="${#authorization.expression('hasRole(''ROLE_EMPLOYE'')')}">
-      <div class="profile-field">
-        <span class="profile-label">ID Manager:</span>
-        <span class="profile-value">[[${profile.myManager.getLastName}]]</span>
-        <span class="profile-value">[[${profile.myManager.getFirstName}]]</span>
-      </div>
-      </div>
+        <!--
+                <img class="profile-image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fvecteurs-premium%2Favatar-employe-bureau-dans-style-dessin-anime-dessin-anime-avatar-femme-bureau_137398715.htm&psig=AOvVaw1eFUctW63OTvJH3KziaWSE&ust=1715593908070000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJC50r3rh4YDFQAAAAAdAAAAABAJ" alt="Profile Image">
+        -->
+        <div class="profile-field">
+          <span class="profile-label">Department:</span>
+          <span class="profile-value">[[${profile.departement}]]</span>
+        </div>
+        <div class="profile-field">
+          <span class="profile-label">Email:</span>
+          <span class="profile-value">[[${profile.email}]]</span>
+        </div>
+        <div class="profile-field">
+          <span class="profile-label">First Name:</span>
+          <span class="profile-value">[[${profile.firstName}]]</span>
+        </div>
+        <div class="profile-field">
+          <span class="profile-label">Last Name:</span>
+          <span class="profile-value">[[${profile.lastName}]]</span>
+        </div>
+        <div class="profile-field">
+          <span class="profile-label">Role:</span>
+          <span class="profile-value">[[${profile.role}]]</span>
+        </div>
+        <div class="profile-field">
+          <span class="profile-label">Solde Conges:</span>
+          <span class="profile-value">[[${profile.soldeConges}]]</span>
+        </div>
+
       </div>
     </div>
   </div>
@@ -146,7 +140,7 @@
       <h1>Employee's tasks </h1>
 
       <!-- Include the fragment -->
-    <div th:replace="Tasks/TasksByExecutor :: tasksByExecutorSection"></div>
+      <div th:replace="Tasks/TasksByExecutor :: tasksByExecutorSection"></div>
     </div>
   </div>
   <div>
@@ -155,7 +149,7 @@
       <h1>
         Employe's Bonuses
       </h1>
-    <div th:replace="Bonus/ListBonusByEmp :: BonusByExecutorSection" ></div>
+      <div th:replace="Bonus/ListBonusByEmp :: BonusByExecutorSection" ></div>
     </div>
 
   </div>
@@ -165,7 +159,7 @@
       <h1>
         Employe's Leaves
       </h1>
-    <div th:replace="Leaves/ListLeavesByEmp :: LeaveByExecutorSection"></div>
+      <div th:replace="Leaves/ListLeavesByEmp :: LeaveByExecutorSection"></div>
     </div>
 
   </div>

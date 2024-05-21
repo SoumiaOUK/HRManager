@@ -24,6 +24,7 @@ public class Person {
     protected String email;
     protected String departement;
     protected String role;
+    protected String imgProfile;
 
     public void setSoldeConges(int soldeConges) {
         this.soldeConges = soldeConges;
